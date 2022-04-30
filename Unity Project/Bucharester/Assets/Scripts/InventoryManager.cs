@@ -7,13 +7,15 @@ public class InventoryManager : MonoBehaviour
 {
     private class Item
     {
+        public int id;
         public Sprite sprite;
         public string name;
         public string description;
         public bool usable;
 
-        public Item(Sprite _sprite, string _name, string _description, bool _usable)
+        public Item(int _id, Sprite _sprite, string _name, string _description, bool _usable)
         {
+            id = _id;
             sprite = _sprite;
             name = _name;
             description = _description;
@@ -25,15 +27,13 @@ public class InventoryManager : MonoBehaviour
     public GameObject itemPrefab;
     public int inventorySize;
 
-    private Item[] items;
-    private int itemCount;
+    private List<Item> items;
 
     // Start is called before the first frame update
     void Start()
     {
-        items = new Item[inventorySize];
-        itemCount = 0;
-        UpdateInventory();
+        items = new List<Item>();
+        //UpdateInventory();
     }
 
     // Update is called once per frame
@@ -44,37 +44,47 @@ public class InventoryManager : MonoBehaviour
 
     void OnEnable()
     {
+        //UpdateInventory();
+    }
+
+    public void AddItem(int id)
+    {
+        Database.ItemData itemData = Database.itemDatabase[id];
+        Sprite sprite = Resources.Load("Art/Sprites/Items/" + itemData.sprite) as Sprite;
+
+        Item item = new Item(id, sprite, itemData.name, itemData.description, itemData.usable);
+        items.Add(item);
         UpdateInventory();
     }
 
-    public void AddItem(Sprite sprite, string name, string description, bool usable)
+    public void RemoveItem(int id)
     {
-        Item item = new Item(sprite, name, description, usable);
-        items[itemCount] = item;
-        itemCount++;
-        UpdateInventory();
-    }
-
-    public void RemoveItem(int index)
-    {
-        for (int i = index; i < itemCount; i++)
+        for (int i = 0; i < items.Count; i++)
         {
-            items[i] = items[i + 1];
+            if (items[i].id == id)
+            {
+                items.RemoveAt(i);
+                break;
+            }
         }
-        itemCount--;
         UpdateInventory();
     }
 
     private void UpdateInventory()
     {
+        ClearInventory();
+        foreach (Item item in items)
+        {
+            GameObject inventoryItem = Instantiate(itemPrefab, inventoryGrid.transform);
+            inventoryItem.GetComponent<InventoryItemController>().SetItemData(item.id, item.sprite, item.name, item.description, item.usable);
+        }
+    }
+
+    private void ClearInventory()
+    {
         foreach (Transform item in inventoryGrid.transform)
         {
             Destroy(item.gameObject);
-        }
-
-        foreach (Item item in items)
-        {
-            Instantiate(itemPrefab, inventoryGrid.transform);
         }
     }
 }

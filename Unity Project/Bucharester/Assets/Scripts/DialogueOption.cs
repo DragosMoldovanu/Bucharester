@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DialogueOption : MonoBehaviour
 {
+    public GameObject inventory;
     private GameObject box;
     private GameObject player;
     public bool closesDialogue;
@@ -11,6 +12,10 @@ public class DialogueOption : MonoBehaviour
     public string interactName;
     public bool affectsQuest;
     public int questId;
+
+    public bool changesItem;
+    public int itemId;
+    public int quantity;
 
     void Start()
     {
@@ -43,6 +48,18 @@ public class DialogueOption : MonoBehaviour
                         GameObject.Find("QuestList").GetComponent<QuestManager>().CompleteQuest(questId);
                     }
                 }
+            }
+        }
+
+        if (changesItem)
+        {
+            if (quantity > 0)
+            {
+                inventory.GetComponent<InventoryManager>().AddItem(itemId);
+            }
+            else
+            {
+                inventory.GetComponent<InventoryManager>().RemoveItem(itemId);
             }
         }
     }
