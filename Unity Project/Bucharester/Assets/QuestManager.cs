@@ -5,8 +5,8 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
     public GameObject questPrefab;
-    private List<int> activeQuests;
-    private List<int> completedQuests;
+    public List<int> activeQuests;
+    public List<int> completedQuests;
 
     // Start is called before the first frame update
     void Start()

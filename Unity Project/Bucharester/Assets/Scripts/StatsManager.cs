@@ -10,8 +10,8 @@ public class StatsManager : MonoBehaviour
     public float hungerPerSecond;
     public bool drainHunger;
 
-    private int moneyAmount = 100;
-    private float hungerPercent = 100;
+    private int moneyAmount = 0;
+    private float hungerPercent = 50;
 
     // Start is called before the first frame update
     void Start()

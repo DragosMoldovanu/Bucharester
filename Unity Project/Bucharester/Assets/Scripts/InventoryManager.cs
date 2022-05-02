@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-    private class Item
+    public class Item
     {
         public int id;
         public Sprite sprite;
@@ -27,13 +27,13 @@ public class InventoryManager : MonoBehaviour
     public GameObject itemPrefab;
     public int inventorySize;
 
-    private List<Item> items;
+    public List<Item> items;
 
     // Start is called before the first frame update
     void Start()
     {
         items = new List<Item>();
-        //UpdateInventory();
+        UpdateInventory();
     }
 
     // Update is called once per frame
@@ -44,17 +44,34 @@ public class InventoryManager : MonoBehaviour
 
     void OnEnable()
     {
-        //UpdateInventory();
+        UpdateInventory();
     }
 
     public void AddItem(int id)
     {
+        if (items.Count >= inventorySize)
+            return;
+
         Database.ItemData itemData = Database.itemDatabase[id];
-        Sprite sprite = Resources.Load("Art/Sprites/Items/" + itemData.sprite) as Sprite;
+        Sprite sprite = Resources.Load<Sprite>("Art/Sprites/Items/" + itemData.sprite);
 
         Item item = new Item(id, sprite, itemData.name, itemData.description, itemData.usable);
         items.Add(item);
         UpdateInventory();
+
+        foreach (int questId in Database.questDatabase.Keys)
+        {
+            Database.Quest quest = Database.questDatabase[questId];
+
+            foreach (Database.QuestObjective objective in quest.objectives)
+            {
+                if (objective is Database.ItemObjective && (objective as Database.ItemObjective).itemId == id)
+                {
+                    if (GameObject.Find("QuestList").GetComponent<QuestManager>().activeQuests.Contains(questId))
+                        GameObject.Find("QuestList").GetComponent<QuestManager>().CompleteQuest(questId);
+                }
+            }
+        }
     }
 
     public void RemoveItem(int id)

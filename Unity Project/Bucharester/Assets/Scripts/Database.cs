@@ -89,15 +89,13 @@ public class Database : ScriptableObject
 
     public static Dictionary<int, ItemData> itemDatabase = new Dictionary<int, ItemData>()
     {
-        { 1, new ItemData("hamburger", "Hamburger", "Classic WcDonalds hamburger", true) },
-        { 2, new ItemData("item2", "item2", "desc2", false) },
-        { 3, new ItemData("item3", "item3", "desc3", false) }
+        { 1, new ItemData("burger", "Burger", "Classic WcDonalds hamburger", true) }
     };
 
     public static Dictionary<int, Quest> questDatabase = new Dictionary<int, Quest>()
     {
-        { 1, new Quest("Item1", "quest1", 1, new InteractObjective[] {new InteractObjective("Goal", 0, 1, "do stuff") }) },
-        { 2, new Quest(null, "quest2", 1, new InteractObjective[] {new InteractObjective("Goal2", 0, 1, "extra stuff")}) }
+        { 1, new Quest("Beggar", "Quest1", 1, new ItemObjective[] {new ItemObjective(1, 1, "Get a burger") }) },
+        { 2, new Quest(null, "Quest2", 1, new InteractObjective[] {new InteractObjective("Beggar", 0, 1, "Give a burger to hobo")}) }
     };
 
     public static List<Questline> questlineDatabase = new List<Questline>()

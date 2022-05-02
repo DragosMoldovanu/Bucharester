@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueOption : MonoBehaviour
 {
@@ -21,6 +22,26 @@ public class DialogueOption : MonoBehaviour
     {
         box = GameObject.Find("DialogueBox");
         player = GameObject.Find("Player");
+    }
+
+    private void Update()
+    {
+        if (changesItem)
+        {
+            if (quantity < 0)
+            {
+                foreach (InventoryManager.Item item in inventory.GetComponent<InventoryManager>().items)
+                {
+                    if (item.id == itemId)
+                    {
+                        return;
+                    }
+                }
+                GetComponent<Button>().interactable = false;
+                return;
+            }
+        }
+        GetComponent<Button>().interactable = true;
     }
 
     public void Selected()
