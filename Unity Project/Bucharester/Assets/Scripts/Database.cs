@@ -89,7 +89,8 @@ public class Database : ScriptableObject
 
     public static Dictionary<int, ItemData> itemDatabase = new Dictionary<int, ItemData>()
     {
-        { 1, new ItemData("burger", "Burger", "Classic WcDonalds hamburger", true) }
+        { 1, new ItemData("burger", "Burger", "Classic WcDonalds hamburger. Why do they always look better in the ads?", true) },
+        { 2, new ItemData("soda", "Soda", "Postpone your hunger with a sugary drink!", true) }
     };
 
     public static Dictionary<int, Quest> questDatabase = new Dictionary<int, Quest>()
