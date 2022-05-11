@@ -60,7 +60,8 @@ public class QuestManager : MonoBehaviour
         {
             if (activeQuests[i] == id)
             {
-                Destroy(transform.GetChild(i).gameObject);
+                //Destroy(transform.GetChild(i).gameObject);
+                transform.GetChild(i).GetComponent<Animator>().SetTrigger("complete");
                 break;
             }
         }

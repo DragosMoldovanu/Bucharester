@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7881487488103097516}
   - component: {fileID: 3597570870421714106}
   - component: {fileID: 8344907912119207507}
+  - component: {fileID: 8245182870716277742}
+  - component: {fileID: 2967540462452543187}
   m_Layer: 5
   m_Name: Quest
   m_TagString: Untagged
@@ -91,6 +93,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questObjectives: {fileID: 3693811747209401130}
+--- !u!95 &8245182870716277742
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4828795835075476447}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 413a0ae42c1ea844280cf4aaf78e3782, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2967540462452543187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4828795835075476447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c08aee360d8d14595708dbd3fcc811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seconds: 0
+  selfDestruct: 0
 --- !u!1 &5614090136302573244
 GameObject:
   m_ObjectHideFlags: 0
