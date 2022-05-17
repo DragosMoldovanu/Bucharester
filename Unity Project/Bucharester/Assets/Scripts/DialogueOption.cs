@@ -17,6 +17,7 @@ public class DialogueOption : MonoBehaviour
 
     public bool changesItem;
     public int itemId;
+    public int itemQuantity;
 
     public bool changesMoney;
     public int quantity;
@@ -31,7 +32,7 @@ public class DialogueOption : MonoBehaviour
     {
         if (changesItem)
         {
-            if (quantity < 0)
+            if (itemQuantity < 0)
             {
                 foreach (InventoryManager.Item item in inventory.GetComponent<InventoryManager>().items)
                 {

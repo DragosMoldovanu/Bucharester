@@ -43,10 +43,12 @@ public class Database : ScriptableObject
     public class ItemEffect : DialogueEffect
     {
         public int itemId;
+        public int quantity;
 
-        public ItemEffect(int itemId)
+        public ItemEffect(int itemId, int quantity)
         {
             this.itemId = itemId;
+            this.quantity = quantity;
         }
     }
 
@@ -174,9 +176,16 @@ public class Database : ScriptableObject
         { 2, new Quest(null, "Quest2", 1, new InteractObjective[] {new InteractObjective("Beggar", 0, 1, "Give a burger to hobo")}) }
     };
 
-    public static Dictionary<int, Dialogue> dialogueDatabase = new Dictionary<int, Dialogue>();
+    public static Dictionary<int, Dialogue> dialogueDatabase = new Dictionary<int, Dialogue>()
+    {
+        { 1, new Dialogue(new List<DialogueEffect>() { new QuestEffect(1, true, false) }, "Hobo", "Hey, you got anything to eat?", "Sure", null, "Sorry, I don't" ) },
+        { 2, new Dialogue(new List<DialogueEffect>() { new QuestEffect(2, false, true), new ItemEffect(1, -1)}, "Hobo", "Thanks mate", null, "No Problem", null) }
+    };
 
-    public static Dictionary<int, TreeNode> treeDatabase = new Dictionary<int, TreeNode>();
+    public static Dictionary<int, TreeNode> treeDatabase = new Dictionary<int, TreeNode>()
+    {
+        { 1, new TreeNode( dialogueDatabase[1], dialogueDatabase[2], null, null) }
+    };
 
     public static List<Questline> questlineDatabase = new List<Questline>()
     {

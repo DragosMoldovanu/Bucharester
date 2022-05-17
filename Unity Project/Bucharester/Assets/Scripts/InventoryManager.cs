@@ -44,7 +44,7 @@ public class InventoryManager : MonoBehaviour
 
     void OnEnable()
     {
-        UpdateInventory();
+        //UpdateInventory();
     }
 
     public void AddItem(int id)
@@ -87,7 +87,7 @@ public class InventoryManager : MonoBehaviour
         UpdateInventory();
     }
 
-    private void UpdateInventory()
+    public void UpdateInventory()
     {
         ClearInventory();
         foreach (Item item in items)

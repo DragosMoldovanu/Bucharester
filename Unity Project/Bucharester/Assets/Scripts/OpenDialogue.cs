@@ -39,89 +39,118 @@ public class OpenDialogue : MonoBehaviour
         {
             optionButton1.SetActive(true);
             optionButton1.transform.Find("Text").GetComponent<Text>().text = dialogue.option1;
+            if (node.option1 != null) {
+                foreach (Database.DialogueEffect effect in node.option1.effects)
+                {
+                    if (effect is Database.QuestEffect)
+                    {
+                        optionButton1.GetComponent<DialogueOption>().affectsQuest = true;
+                        optionButton1.GetComponent<DialogueOption>().interactName = name;
+                        optionButton1.GetComponent<DialogueOption>().questId = (effect as Database.QuestEffect).questId;
+                    }
 
-            foreach (Database.DialogueEffect effect in node.option1.effects)
+                    if (effect is Database.ItemEffect)
+                    {
+                        optionButton1.GetComponent<DialogueOption>().changesItem = true;
+                        optionButton1.GetComponent<DialogueOption>().itemId = (effect as Database.ItemEffect).itemId;
+                        optionButton1.GetComponent<DialogueOption>().itemQuantity = (effect as Database.ItemEffect).quantity;
+                    }
+
+                    if (effect is Database.MoneyEffect)
+                    {
+                        optionButton1.GetComponent<DialogueOption>().changesMoney = true;
+                        optionButton1.GetComponent<DialogueOption>().quantity = (effect as Database.MoneyEffect).quantity;
+                    }
+                }
+                optionButton1.GetComponent<DialogueOption>().closesDialogue = false;
+            }
+            else
             {
-                if (effect is Database.QuestEffect)
-                {
-                    optionButton1.GetComponent<DialogueOption>().affectsQuest = true;
-                    optionButton1.GetComponent<DialogueOption>().interactName = name;
-                    optionButton1.GetComponent<DialogueOption>().questId = (effect as Database.QuestEffect).questId;
-                }
-
-                if (effect is Database.ItemEffect)
-                {
-                    optionButton1.GetComponent<DialogueOption>().changesItem = true;
-                    optionButton1.GetComponent<DialogueOption>().itemId = (effect as Database.ItemEffect).itemId;
-                }
-
-                if (effect is Database.MoneyEffect)
-                {
-                    optionButton1.GetComponent<DialogueOption>().changesMoney = true;
-                    optionButton1.GetComponent<DialogueOption>().quantity = (effect as Database.MoneyEffect).quantity;
-                }
+                optionButton1.GetComponent<DialogueOption>().closesDialogue = true;
             }
         }
         else
         {
             optionButton1.SetActive(false);
         }
+
+
+
         if (dialogue.option2 != null)
         {
-            optionButton1.SetActive(true);
-            optionButton1.transform.Find("Text").GetComponent<Text>().text = dialogue.option2;
-
-            foreach (Database.DialogueEffect effect in node.option2.effects)
+            optionButton2.SetActive(true);
+            optionButton2.transform.Find("Text").GetComponent<Text>().text = dialogue.option2;
+            if (node.option2 != null)
             {
-                if (effect is Database.QuestEffect)
+                foreach (Database.DialogueEffect effect in node.option2.effects)
                 {
-                    optionButton1.GetComponent<DialogueOption>().affectsQuest = true;
-                    optionButton1.GetComponent<DialogueOption>().interactName = name;
-                    optionButton1.GetComponent<DialogueOption>().questId = (effect as Database.QuestEffect).questId;
-                }
+                    if (effect is Database.QuestEffect)
+                    {
+                        optionButton2.GetComponent<DialogueOption>().affectsQuest = true;
+                        optionButton2.GetComponent<DialogueOption>().interactName = name;
+                        optionButton2.GetComponent<DialogueOption>().questId = (effect as Database.QuestEffect).questId;
+                    }
 
-                if (effect is Database.ItemEffect)
-                {
-                    optionButton1.GetComponent<DialogueOption>().changesItem = true;
-                    optionButton1.GetComponent<DialogueOption>().itemId = (effect as Database.ItemEffect).itemId;
-                }
+                    if (effect is Database.ItemEffect)
+                    {
+                        optionButton2.GetComponent<DialogueOption>().changesItem = true;
+                        optionButton2.GetComponent<DialogueOption>().itemId = (effect as Database.ItemEffect).itemId;
+                        optionButton2.GetComponent<DialogueOption>().itemQuantity = (effect as Database.ItemEffect).quantity;
+                    }
 
-                if (effect is Database.MoneyEffect)
-                {
-                    optionButton1.GetComponent<DialogueOption>().changesMoney = true;
-                    optionButton1.GetComponent<DialogueOption>().quantity = (effect as Database.MoneyEffect).quantity;
+                    if (effect is Database.MoneyEffect)
+                    {
+                        optionButton2.GetComponent<DialogueOption>().changesMoney = true;
+                        optionButton2.GetComponent<DialogueOption>().quantity = (effect as Database.MoneyEffect).quantity;
+                    }
                 }
+                optionButton2.GetComponent<DialogueOption>().closesDialogue = false;
+            }
+            else
+            {
+                optionButton2.GetComponent<DialogueOption>().closesDialogue = true;
             }
         }
         else
         {
             optionButton2.SetActive(false);
         }
+
+
+
         if (dialogue.option3 != null)
         {
-            optionButton1.SetActive(true);
-            optionButton1.transform.Find("Text").GetComponent<Text>().text = dialogue.option3;
-
-            foreach (Database.DialogueEffect effect in node.option3.effects)
+            optionButton3.SetActive(true);
+            optionButton3.transform.Find("Text").GetComponent<Text>().text = dialogue.option3;
+            if (node.option3 != null)
             {
-                if (effect is Database.QuestEffect)
+                foreach (Database.DialogueEffect effect in node.option3.effects)
                 {
-                    optionButton1.GetComponent<DialogueOption>().affectsQuest = true;
-                    optionButton1.GetComponent<DialogueOption>().interactName = name;
-                    optionButton1.GetComponent<DialogueOption>().questId = (effect as Database.QuestEffect).questId;
-                }
+                    if (effect is Database.QuestEffect)
+                    {
+                        optionButton3.GetComponent<DialogueOption>().affectsQuest = true;
+                        optionButton3.GetComponent<DialogueOption>().interactName = name;
+                        optionButton3.GetComponent<DialogueOption>().questId = (effect as Database.QuestEffect).questId;
+                    }
 
-                if (effect is Database.ItemEffect)
-                {
-                    optionButton1.GetComponent<DialogueOption>().changesItem = true;
-                    optionButton1.GetComponent<DialogueOption>().itemId = (effect as Database.ItemEffect).itemId;
-                }
+                    if (effect is Database.ItemEffect)
+                    {
+                        optionButton3.GetComponent<DialogueOption>().changesItem = true;
+                        optionButton3.GetComponent<DialogueOption>().itemId = (effect as Database.ItemEffect).itemId;
+                        optionButton3.GetComponent<DialogueOption>().itemQuantity = (effect as Database.ItemEffect).quantity;
+                    }
 
-                if (effect is Database.MoneyEffect)
-                {
-                    optionButton1.GetComponent<DialogueOption>().changesMoney = true;
-                    optionButton1.GetComponent<DialogueOption>().quantity = (effect as Database.MoneyEffect).quantity;
+                    if (effect is Database.MoneyEffect)
+                    {
+                        optionButton3.GetComponent<DialogueOption>().changesMoney = true;
+                        optionButton3.GetComponent<DialogueOption>().quantity = (effect as Database.MoneyEffect).quantity;
+                    }
                 }
+                optionButton3.GetComponent<DialogueOption>().closesDialogue = false;
+            }
+            else
+            {
+                optionButton3.GetComponent<DialogueOption>().closesDialogue = true;
             }
         }
         else

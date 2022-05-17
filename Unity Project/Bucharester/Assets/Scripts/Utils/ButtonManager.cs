@@ -44,4 +44,17 @@ public class ButtonManager : MonoBehaviour
     {
         panel.SetActive(!panel.activeSelf);
     }
+
+    public void OpenInventory()
+    {
+        if (!panel.activeSelf)
+        {
+            panel.SetActive(true);
+            transform.parent.GetComponent<InventoryManager>().UpdateInventory();
+        }
+        else
+        {
+            panel.SetActive(false);
+        }
+    }
 }

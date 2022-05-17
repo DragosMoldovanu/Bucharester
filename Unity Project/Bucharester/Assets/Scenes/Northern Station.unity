@@ -1008,7 +1008,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 121816975}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: OpenClose
+        m_MethodName: OpenInventory
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1513,8 +1513,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   opensDialogue: 1
-  affectsQuest: 1
-  questId: 1
 --- !u!114 &171301941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1531,32 +1529,10 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
-  dialogueTitle: Hobo
-  dialogueText: Hey mate, can you grab me something to eat?
+  dialogueId: 1
   optionButton1: {fileID: 0}
-  hasOption1: 1
-  option1: Here you go
-  affectsQuest1: 1
-  questId1: 2
-  changesItem1: 1
-  itemId1: 1
-  quantity1: -1
   optionButton2: {fileID: 0}
-  hasOption2: 0
-  option2: 
-  affectsQuest2: 0
-  questId2: 0
-  changesItem2: 0
-  itemId2: 0
-  quantity2: 0
   optionButton3: {fileID: 0}
-  hasOption3: 1
-  option3: Sorry, no
-  affectsQuest3: 0
-  questId3: 0
-  changesItem3: 0
-  itemId3: 0
-  quantity3: 0
 --- !u!114 &171301942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2812,12 +2788,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1164446761}
+  stats: {fileID: 478464568}
   closesDialogue: 1
   interactName: 
   affectsQuest: 0
   questId: 0
   changesItem: 0
   itemId: 0
+  itemQuantity: 0
+  changesMoney: 0
   quantity: 0
 --- !u!114 &303790743
 MonoBehaviour:
@@ -7544,33 +7523,10 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
-  dialogueTitle: Broken Vending Machine
-  dialogueText: There's a paper glued on it that says "Out of service. STOP KICKING
-    VENDING MACHINES"
+  dialogueId: 0
   optionButton1: {fileID: 0}
-  hasOption1: 1
-  option1: Kick it
-  affectsQuest1: 0
-  questId1: 0
-  changesItem1: 1
-  itemId1: 2
-  quantity1: 1
   optionButton2: {fileID: 0}
-  hasOption2: 0
-  option2: 
-  affectsQuest2: 0
-  questId2: 0
-  changesItem2: 0
-  itemId2: 0
-  quantity2: 0
   optionButton3: {fileID: 0}
-  hasOption3: 1
-  option3: Leave it
-  affectsQuest3: 0
-  questId3: 0
-  changesItem3: 0
-  itemId3: 0
-  quantity3: 0
 --- !u!114 &860470302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7584,8 +7540,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   opensDialogue: 1
-  affectsQuest: 0
-  questId: 0
 --- !u!65 &860470303
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11624,33 +11578,10 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
-  dialogueTitle: McD
-  dialogueText: Hi welcome to McD! Huh, you don't have money? Sorry, but this is
-    a fast food restaurant, not a charity.
+  dialogueId: 0
   optionButton1: {fileID: 0}
-  hasOption1: 0
-  option1: 
-  affectsQuest1: 0
-  questId1: 0
-  changesItem1: 0
-  itemId1: 0
-  quantity1: 0
   optionButton2: {fileID: 0}
-  hasOption2: 1
-  option2: Leave
-  affectsQuest2: 0
-  questId2: 0
-  changesItem2: 0
-  itemId2: 0
-  quantity2: 0
   optionButton3: {fileID: 0}
-  hasOption3: 0
-  option3: 
-  affectsQuest3: 0
-  questId3: 0
-  changesItem3: 0
-  itemId3: 0
-  quantity3: 0
 --- !u!114 &1237136692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11664,8 +11595,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   opensDialogue: 1
-  affectsQuest: 0
-  questId: 0
 --- !u!65 &1237136693
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13601,33 +13530,10 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
-  dialogueTitle: Vending Machine
-  dialogueText: There is a paper glued on it that says "Don't kick the machine!".
-    Who would do such a revolting thing in a busy train station anyway?......
+  dialogueId: 0
   optionButton1: {fileID: 0}
-  hasOption1: 1
-  option1: Kick it
-  affectsQuest1: 0
-  questId1: 0
-  changesItem1: 1
-  itemId1: 2
-  quantity1: 1
   optionButton2: {fileID: 0}
-  hasOption2: 0
-  option2: 
-  affectsQuest2: 0
-  questId2: 0
-  changesItem2: 0
-  itemId2: 0
-  quantity2: 0
   optionButton3: {fileID: 0}
-  hasOption3: 1
-  option3: Leave it
-  affectsQuest3: 0
-  questId3: 0
-  changesItem3: 0
-  itemId3: 0
-  quantity3: 0
 --- !u!114 &1418408347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13641,8 +13547,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   opensDialogue: 1
-  affectsQuest: 0
-  questId: 0
 --- !u!65 &1418408348
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14887,8 +14791,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   opensDialogue: 1
-  affectsQuest: 1
-  questId: 1
 --- !u!114 &1604219899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14905,33 +14807,10 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
-  dialogueTitle: Diana
-  dialogueText: '*Visibly stressed, holding papers* Oh damn, why did the boss have
-    to request this crap copied right now? I swear this nightmare never ends.'
+  dialogueId: 0
   optionButton1: {fileID: 0}
-  hasOption1: 0
-  option1: 
-  affectsQuest1: 0
-  questId1: 0
-  changesItem1: 0
-  itemId1: 0
-  quantity1: 0
   optionButton2: {fileID: 0}
-  hasOption2: 1
-  option2: Leave
-  affectsQuest2: 0
-  questId2: 0
-  changesItem2: 0
-  itemId2: 0
-  quantity2: 0
   optionButton3: {fileID: 0}
-  hasOption3: 1
-  option3: 
-  affectsQuest3: 0
-  questId3: 0
-  changesItem3: 0
-  itemId3: 0
-  quantity3: 0
 --- !u!114 &1604219900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16143,12 +16022,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1164446761}
+  stats: {fileID: 478464568}
   closesDialogue: 1
   interactName: 
   affectsQuest: 0
   questId: 0
   changesItem: 0
   itemId: 0
+  itemQuantity: 0
+  changesMoney: 0
   quantity: 0
 --- !u!114 &1670254160
 MonoBehaviour:
@@ -16482,12 +16364,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1164446761}
+  stats: {fileID: 478464568}
   closesDialogue: 1
   interactName: 
   affectsQuest: 0
   questId: 0
   changesItem: 0
   itemId: 0
+  itemQuantity: 0
+  changesMoney: 0
   quantity: 0
 --- !u!114 &1715242576
 MonoBehaviour:
@@ -17935,8 +17820,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   opensDialogue: 1
-  affectsQuest: 0
-  questId: 0
 --- !u!114 &1796512598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17953,33 +17836,10 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
-  dialogueTitle: Trashcan
-  dialogueText: You found a brand new, yet discarded hamburger in the trash. It's
-    like McD stuff never perishes. Take it?
+  dialogueId: 0
   optionButton1: {fileID: 0}
-  hasOption1: 1
-  option1: Yes
-  affectsQuest1: 0
-  questId1: 0
-  changesItem1: 1
-  itemId1: 1
-  quantity1: 1
   optionButton2: {fileID: 0}
-  hasOption2: 0
-  option2: 
-  affectsQuest2: 0
-  questId2: 0
-  changesItem2: 0
-  itemId2: 0
-  quantity2: 0
   optionButton3: {fileID: 0}
-  hasOption3: 1
-  option3: Leave it
-  affectsQuest3: 0
-  questId3: 0
-  changesItem3: 0
-  itemId3: 0
-  quantity3: 0
 --- !u!65 &1796512599
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18771,8 +18631,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   opensDialogue: 1
-  affectsQuest: 1
-  questId: 1
 --- !u!114 &1870950421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18789,33 +18647,10 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
-  dialogueTitle: Taxi guy
-  dialogueText: '*Eating sunflower seeds loudly* G''day, need a ride? Only 50 lei,
-    and far better service than those Uber bastards. *clears throat**'
+  dialogueId: 0
   optionButton1: {fileID: 0}
-  hasOption1: 0
-  option1: 
-  affectsQuest1: 0
-  questId1: 0
-  changesItem1: 1
-  itemId1: 0
-  quantity1: 0
   optionButton2: {fileID: 0}
-  hasOption2: 1
-  option2: Umm, not right now
-  affectsQuest2: 0
-  questId2: 0
-  changesItem2: 0
-  itemId2: 0
-  quantity2: 0
   optionButton3: {fileID: 0}
-  hasOption3: 0
-  option3: 
-  affectsQuest3: 0
-  questId3: 0
-  changesItem3: 0
-  itemId3: 0
-  quantity3: 0
 --- !u!114 &1870950422
 MonoBehaviour:
   m_ObjectHideFlags: 0
