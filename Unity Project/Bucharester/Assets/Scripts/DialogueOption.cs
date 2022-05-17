@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DialogueOption : MonoBehaviour
 {
     public GameObject inventory;
+    public GameObject stats;
     private GameObject box;
     private GameObject player;
     public bool closesDialogue;
@@ -16,6 +17,8 @@ public class DialogueOption : MonoBehaviour
 
     public bool changesItem;
     public int itemId;
+
+    public bool changesMoney;
     public int quantity;
 
     void Start()
@@ -82,6 +85,11 @@ public class DialogueOption : MonoBehaviour
             {
                 inventory.GetComponent<InventoryManager>().RemoveItem(itemId);
             }
+        }
+
+        if (changesMoney)
+        {
+            stats.GetComponent<StatsManager>().UpdateMoney(quantity);
         }
     }
 }
