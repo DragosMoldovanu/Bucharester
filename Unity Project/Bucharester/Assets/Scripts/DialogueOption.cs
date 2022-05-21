@@ -10,6 +10,9 @@ public class DialogueOption : MonoBehaviour
     private GameObject box;
     private GameObject player;
     public bool closesDialogue;
+    public bool continuesDialogue;
+    public int continueId;
+    public GameObject interactObject;
 
     public string interactName;
     public bool affectsQuest;
@@ -56,41 +59,10 @@ public class DialogueOption : MonoBehaviour
             player.GetComponent<Movement>().enabled = true;
         }
 
-        if (affectsQuest)
+        if (continuesDialogue)
         {
-            Database.Quest quest = Database.questDatabase[questId];
-
-            if (quest.sourceName == interactName)
-            {
-                GameObject.Find("QuestList").GetComponent<QuestManager>().AcceptQuest(questId);
-            }
-            else
-            {
-                foreach (Database.QuestObjective objective in quest.objectives)
-                {
-                    if (objective is Database.InteractObjective)
-                    {
-                        GameObject.Find("QuestList").GetComponent<QuestManager>().CompleteQuest(questId);
-                    }
-                }
-            }
-        }
-
-        if (changesItem)
-        {
-            if (quantity > 0)
-            {
-                inventory.GetComponent<InventoryManager>().AddItem(itemId);
-            }
-            else
-            {
-                inventory.GetComponent<InventoryManager>().RemoveItem(itemId);
-            }
-        }
-
-        if (changesMoney)
-        {
-            stats.GetComponent<StatsManager>().UpdateMoney(quantity);
+            interactObject.GetComponent<OpenDialogue>().dialogueId = continueId;
+            interactObject.GetComponent<OpenDialogue>().Open();
         }
     }
 }

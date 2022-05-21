@@ -35,6 +35,39 @@ public class OpenDialogue : MonoBehaviour
         title.text = dialogue.name;
         description.text = dialogue.line;
 
+        foreach (Database.DialogueEffect effect in dialogue.effects)
+        {
+            if (effect is Database.QuestEffect)
+            {
+                Database.QuestEffect quest = effect as Database.QuestEffect;
+                if (quest.accept)
+                {
+                    GameObject.Find("QuestList").GetComponent<QuestManager>().AcceptQuest(quest.questId);
+                }
+                else if (quest.complete)
+                {
+                    GameObject.Find("QuestList").GetComponent<QuestManager>().CompleteQuest(quest.questId);
+                }
+            }
+            else if (effect is Database.ItemEffect)
+            {
+                Database.ItemEffect item = effect as Database.ItemEffect;
+                if (item.quantity > 0)
+                {
+                    GameObject.Find("Inventory").GetComponent<InventoryManager>().AddItem(item.itemId);
+                }
+                else if (item.quantity < 0)
+                {
+                    GameObject.Find("Inventory").GetComponent<InventoryManager>().RemoveItem(item.itemId);
+                }
+            }
+            else if (effect is Database.MoneyEffect)
+            {
+                Database.MoneyEffect money = effect as Database.MoneyEffect;
+                GameObject.Find("Stats").GetComponent<StatsManager>().UpdateMoney(money.quantity);
+            }
+        }
+
         if (dialogue.option1 != null)
         {
             optionButton1.SetActive(true);
@@ -63,10 +96,14 @@ public class OpenDialogue : MonoBehaviour
                     }
                 }
                 optionButton1.GetComponent<DialogueOption>().closesDialogue = false;
+                optionButton1.GetComponent<DialogueOption>().continuesDialogue = true;
+                optionButton1.GetComponent<DialogueOption>().continueId = node.option1.id;
+                optionButton1.GetComponent<DialogueOption>().interactObject = gameObject;
             }
             else
             {
                 optionButton1.GetComponent<DialogueOption>().closesDialogue = true;
+                optionButton1.GetComponent<DialogueOption>().continuesDialogue = false;
             }
         }
         else
@@ -105,10 +142,14 @@ public class OpenDialogue : MonoBehaviour
                     }
                 }
                 optionButton2.GetComponent<DialogueOption>().closesDialogue = false;
+                optionButton2.GetComponent<DialogueOption>().continuesDialogue = true;
+                optionButton2.GetComponent<DialogueOption>().continueId = node.option2.id;
+                optionButton2.GetComponent<DialogueOption>().interactObject = gameObject;
             }
             else
             {
                 optionButton2.GetComponent<DialogueOption>().closesDialogue = true;
+                optionButton2.GetComponent<DialogueOption>().continuesDialogue = false;
             }
         }
         else
@@ -147,10 +188,14 @@ public class OpenDialogue : MonoBehaviour
                     }
                 }
                 optionButton3.GetComponent<DialogueOption>().closesDialogue = false;
+                optionButton3.GetComponent<DialogueOption>().continuesDialogue = true;
+                optionButton3.GetComponent<DialogueOption>().continueId = node.option3.id;
+                optionButton3.GetComponent<DialogueOption>().interactObject = gameObject;
             }
             else
             {
                 optionButton3.GetComponent<DialogueOption>().closesDialogue = true;
+                optionButton3.GetComponent<DialogueOption>().continuesDialogue = false;
             }
         }
         else

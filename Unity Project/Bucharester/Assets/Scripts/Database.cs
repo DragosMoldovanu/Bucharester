@@ -64,6 +64,7 @@ public class Database : ScriptableObject
 
     public class Dialogue
     {
+        public int id;
         public List<DialogueEffect> effects;
         public string name;
         public string line;
@@ -71,8 +72,9 @@ public class Database : ScriptableObject
         public string option2;
         public string option3;
 
-        public Dialogue(List<DialogueEffect> effects, string name, string line, string option1, string option2, string option3)
+        public Dialogue(int id, List<DialogueEffect> effects, string name, string line, string option1, string option2, string option3)
         {
+            this.id = id;
             this.effects = effects;
             this.name = name;
             this.line = line;
@@ -178,13 +180,16 @@ public class Database : ScriptableObject
 
     public static Dictionary<int, Dialogue> dialogueDatabase = new Dictionary<int, Dialogue>()
     {
-        { 1, new Dialogue(new List<DialogueEffect>() { new QuestEffect(1, true, false) }, "Hobo", "Hey, you got anything to eat?", "Sure", null, "Sorry, I don't" ) },
-        { 2, new Dialogue(new List<DialogueEffect>() { new QuestEffect(2, false, true), new ItemEffect(1, -1)}, "Hobo", "Thanks mate", null, "No Problem", null) }
+        { 1, new Dialogue(1, new List<DialogueEffect>() { new QuestEffect(1, true, false) }, "Hobo", "Hey, you got anything to eat?", "Sure", null, "Sorry, I don't" ) },
+        { 2, new Dialogue(2, new List<DialogueEffect>() { new QuestEffect(2, false, true), new ItemEffect(1, -1) }, "Hobo", "Thanks mate", null, "No Problem", null) },
+        { 3, new Dialogue(3, new List<DialogueEffect>(), "Trash", "There is a WcDonalds hamburger thrown in the trash. Take it?", "Yes", null, "No") },
+        { 4, new Dialogue(4, new List<DialogueEffect>() { new QuestEffect(1,false, true), new ItemEffect(1, 1) }, "Trash", "You got a WcDonalds hamburger!", null, "Great!", null) }
     };
 
     public static Dictionary<int, TreeNode> treeDatabase = new Dictionary<int, TreeNode>()
     {
-        { 1, new TreeNode( dialogueDatabase[1], dialogueDatabase[2], null, null) }
+        { 1, new TreeNode( dialogueDatabase[1], dialogueDatabase[2], null, null) },
+        { 2, new TreeNode( dialogueDatabase[3], dialogueDatabase[4], null, null) }
     };
 
     public static List<Questline> questlineDatabase = new List<Questline>()

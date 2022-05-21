@@ -17836,7 +17836,7 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
-  dialogueId: 0
+  dialogueId: 2
   optionButton1: {fileID: 0}
   optionButton2: {fileID: 0}
   optionButton3: {fileID: 0}
