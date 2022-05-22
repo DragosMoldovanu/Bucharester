@@ -11,6 +11,7 @@ public class OpenDialogue : MonoBehaviour
     public GameObject box;
     public Text title;
     public Text description;
+    public int startDialogue;
     public int dialogueId;
 
     [Header("Option 1")]
@@ -23,13 +24,21 @@ public class OpenDialogue : MonoBehaviour
     public GameObject optionButton3;
 
     // Update is called once per frame
-    public void Open()
+    public void Open(bool startOver = true)
     {
         player.GetComponent<Movement>().enabled = false;
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         box.SetActive(true);
 
-        Database.TreeNode node = Database.treeDatabase[dialogueId];
+        Database.TreeNode node;
+        if (startOver)
+        {
+            node = Database.treeDatabase[startDialogue];
+        }
+        else
+        {
+            node = Database.treeDatabase[dialogueId];
+        }
         Database.Dialogue dialogue = node.current;
 
         title.text = dialogue.name;
@@ -66,14 +75,23 @@ public class OpenDialogue : MonoBehaviour
                 Database.MoneyEffect money = effect as Database.MoneyEffect;
                 GameObject.Find("Stats").GetComponent<StatsManager>().UpdateMoney(money.quantity);
             }
+            else if (effect is Database.ChangeEffect)
+            {
+                Database.ChangeEffect change = effect as Database.ChangeEffect;
+                startDialogue = change.id;
+            }
+            else if (effect is Database.DestroyEffect)
+            {
+                Destroy(gameObject);
+            }
         }
 
         if (dialogue.option1 != null)
         {
             optionButton1.SetActive(true);
             optionButton1.transform.Find("Text").GetComponent<Text>().text = dialogue.option1;
-            if (node.option1 != null) {
-                foreach (Database.DialogueEffect effect in node.option1.effects)
+            if (node.option1 > 0) {
+                foreach (Database.DialogueEffect effect in Database.dialogueDatabase[node.option1].effects)
                 {
                     if (effect is Database.QuestEffect)
                     {
@@ -97,7 +115,7 @@ public class OpenDialogue : MonoBehaviour
                 }
                 optionButton1.GetComponent<DialogueOption>().closesDialogue = false;
                 optionButton1.GetComponent<DialogueOption>().continuesDialogue = true;
-                optionButton1.GetComponent<DialogueOption>().continueId = node.option1.id;
+                optionButton1.GetComponent<DialogueOption>().continueId = node.option1;
                 optionButton1.GetComponent<DialogueOption>().interactObject = gameObject;
             }
             else
@@ -117,9 +135,9 @@ public class OpenDialogue : MonoBehaviour
         {
             optionButton2.SetActive(true);
             optionButton2.transform.Find("Text").GetComponent<Text>().text = dialogue.option2;
-            if (node.option2 != null)
+            if (node.option2 > 0)
             {
-                foreach (Database.DialogueEffect effect in node.option2.effects)
+                foreach (Database.DialogueEffect effect in Database.dialogueDatabase[node.option2].effects)
                 {
                     if (effect is Database.QuestEffect)
                     {
@@ -143,7 +161,7 @@ public class OpenDialogue : MonoBehaviour
                 }
                 optionButton2.GetComponent<DialogueOption>().closesDialogue = false;
                 optionButton2.GetComponent<DialogueOption>().continuesDialogue = true;
-                optionButton2.GetComponent<DialogueOption>().continueId = node.option2.id;
+                optionButton2.GetComponent<DialogueOption>().continueId = node.option2;
                 optionButton2.GetComponent<DialogueOption>().interactObject = gameObject;
             }
             else
@@ -163,9 +181,9 @@ public class OpenDialogue : MonoBehaviour
         {
             optionButton3.SetActive(true);
             optionButton3.transform.Find("Text").GetComponent<Text>().text = dialogue.option3;
-            if (node.option3 != null)
+            if (node.option3 > 0)
             {
-                foreach (Database.DialogueEffect effect in node.option3.effects)
+                foreach (Database.DialogueEffect effect in Database.dialogueDatabase[node.option3].effects)
                 {
                     if (effect is Database.QuestEffect)
                     {
@@ -189,7 +207,7 @@ public class OpenDialogue : MonoBehaviour
                 }
                 optionButton3.GetComponent<DialogueOption>().closesDialogue = false;
                 optionButton3.GetComponent<DialogueOption>().continuesDialogue = true;
-                optionButton3.GetComponent<DialogueOption>().continueId = node.option3.id;
+                optionButton3.GetComponent<DialogueOption>().continueId = node.option3;
                 optionButton3.GetComponent<DialogueOption>().interactObject = gameObject;
             }
             else

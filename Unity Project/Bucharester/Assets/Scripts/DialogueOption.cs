@@ -62,7 +62,7 @@ public class DialogueOption : MonoBehaviour
         if (continuesDialogue)
         {
             interactObject.GetComponent<OpenDialogue>().dialogueId = continueId;
-            interactObject.GetComponent<OpenDialogue>().Open();
+            interactObject.GetComponent<OpenDialogue>().Open(false);
         }
     }
 }

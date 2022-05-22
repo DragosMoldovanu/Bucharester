@@ -47,6 +47,19 @@ public class InventoryManager : MonoBehaviour
         //UpdateInventory();
     }
 
+    public int ItemCount(int itemId)
+    {
+        int count = 0;
+        foreach (Item item in items)
+        {
+            if (item.id == itemId)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public void AddItem(int id)
     {
         if (items.Count >= inventorySize)

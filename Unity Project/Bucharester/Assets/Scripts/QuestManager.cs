@@ -7,6 +7,7 @@ public class QuestManager : MonoBehaviour
     public GameObject questPrefab;
     public List<int> activeQuests;
     public List<int> completedQuests;
+    public InventoryManager inventory;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,25 @@ public class QuestManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        int[] questsCopy = new int[activeQuests.Count];
+        activeQuests.CopyTo(questsCopy);
+
+        foreach (int id in questsCopy)
+        {
+            Database.Quest quest = Database.questDatabase[id];
+
+            foreach (Database.QuestObjective obj in quest.objectives)
+            {
+                if (obj is Database.ItemObjective)
+                {
+                    int itemId = (obj as Database.ItemObjective).itemId;
+                    if (inventory.ItemCount(itemId) >= (obj as Database.ItemObjective).count)
+                    {
+                        CompleteQuest(id);
+                    }
+                }
+            }
+        }
     }
 
     public void AcceptQuest(int id)

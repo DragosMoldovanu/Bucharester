@@ -62,6 +62,21 @@ public class Database : ScriptableObject
         }
     }
 
+    public class ChangeEffect : DialogueEffect
+    {
+        public int id;
+
+        public ChangeEffect(int id)
+        {
+            this.id = id;
+        }
+    }
+
+    public class DestroyEffect : DialogueEffect
+    {
+
+    }
+
     public class Dialogue
     {
         public int id;
@@ -87,11 +102,11 @@ public class Database : ScriptableObject
     public class TreeNode
     {
         public Dialogue current;
-        public Dialogue option1;
-        public Dialogue option2;
-        public Dialogue option3;
+        public int option1;
+        public int option2;
+        public int option3;
 
-        public TreeNode(Dialogue current, Dialogue option1, Dialogue option2, Dialogue option3)
+        public TreeNode(Dialogue current, int option1, int option2, int option3)
         {
             this.current = current;
             this.option1 = option1;
@@ -181,15 +196,21 @@ public class Database : ScriptableObject
     public static Dictionary<int, Dialogue> dialogueDatabase = new Dictionary<int, Dialogue>()
     {
         { 1, new Dialogue(1, new List<DialogueEffect>() { new QuestEffect(1, true, false) }, "Hobo", "Hey, you got anything to eat?", "Sure", null, "Sorry, I don't" ) },
-        { 2, new Dialogue(2, new List<DialogueEffect>() { new QuestEffect(2, false, true), new ItemEffect(1, -1) }, "Hobo", "Thanks mate", null, "No Problem", null) },
+        { 2, new Dialogue(2, new List<DialogueEffect>() { new QuestEffect(2, false, true), new ItemEffect(1, -1), new ChangeEffect(5) }, "Hobo", "Thanks mate", null, "No Problem", null) },
         { 3, new Dialogue(3, new List<DialogueEffect>(), "Trash", "There is a WcDonalds hamburger thrown in the trash. Take it?", "Yes", null, "No") },
-        { 4, new Dialogue(4, new List<DialogueEffect>() { new QuestEffect(1,false, true), new ItemEffect(1, 1) }, "Trash", "You got a WcDonalds hamburger!", null, "Great!", null) }
+        { 4, new Dialogue(4, new List<DialogueEffect>() { new QuestEffect(1,false, true), new ItemEffect(1, 1), new DestroyEffect() }, "Trash", "You got a WcDonalds hamburger!", null, "Great!", null) },
+
+        { 5, new Dialogue(5, new List<DialogueEffect>(), "Hobo", "I owe you one!", null, "Sure thing", null) }
     };
 
     public static Dictionary<int, TreeNode> treeDatabase = new Dictionary<int, TreeNode>()
     {
-        { 1, new TreeNode( dialogueDatabase[1], dialogueDatabase[2], null, null) },
-        { 2, new TreeNode( dialogueDatabase[3], dialogueDatabase[4], null, null) }
+        { 1, new TreeNode( dialogueDatabase[1], 2, -1, -1) },
+        { 2, new TreeNode( dialogueDatabase[2], -1, -1, -1) },
+        { 3, new TreeNode( dialogueDatabase[3], 4, -1, -1) },
+        { 4, new TreeNode( dialogueDatabase[4], -1, -1, -1) },
+
+        { 5, new TreeNode( dialogueDatabase[5], -1, -1, -1) }
     };
 
     public static List<Questline> questlineDatabase = new List<Questline>()

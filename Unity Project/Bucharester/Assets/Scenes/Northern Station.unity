@@ -1529,6 +1529,7 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
+  startDialogue: 1
   dialogueId: 1
   optionButton1: {fileID: 0}
   optionButton2: {fileID: 0}
@@ -2790,6 +2791,9 @@ MonoBehaviour:
   inventory: {fileID: 1164446761}
   stats: {fileID: 478464568}
   closesDialogue: 1
+  continuesDialogue: 0
+  continueId: 0
+  interactObject: {fileID: 0}
   interactName: 
   affectsQuest: 0
   questId: 0
@@ -7523,6 +7527,7 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
+  startDialogue: 0
   dialogueId: 0
   optionButton1: {fileID: 0}
   optionButton2: {fileID: 0}
@@ -11578,6 +11583,7 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
+  startDialogue: 0
   dialogueId: 0
   optionButton1: {fileID: 0}
   optionButton2: {fileID: 0}
@@ -13530,6 +13536,7 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
+  startDialogue: 0
   dialogueId: 0
   optionButton1: {fileID: 0}
   optionButton2: {fileID: 0}
@@ -14807,6 +14814,7 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
+  startDialogue: 0
   dialogueId: 0
   optionButton1: {fileID: 0}
   optionButton2: {fileID: 0}
@@ -16024,6 +16032,9 @@ MonoBehaviour:
   inventory: {fileID: 1164446761}
   stats: {fileID: 478464568}
   closesDialogue: 1
+  continuesDialogue: 0
+  continueId: 0
+  interactObject: {fileID: 0}
   interactName: 
   affectsQuest: 0
   questId: 0
@@ -16366,6 +16377,9 @@ MonoBehaviour:
   inventory: {fileID: 1164446761}
   stats: {fileID: 478464568}
   closesDialogue: 1
+  continuesDialogue: 0
+  continueId: 0
+  interactObject: {fileID: 0}
   interactName: 
   affectsQuest: 0
   questId: 0
@@ -16663,6 +16677,7 @@ MonoBehaviour:
   questPrefab: {fileID: 4828795835075476447, guid: b42c62c89f6b6e04d92624f3bee40e1c, type: 3}
   activeQuests: 
   completedQuests: 
+  inventory: {fileID: 1164446762}
 --- !u!114 &1733567446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17836,7 +17851,8 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
-  dialogueId: 2
+  startDialogue: 3
+  dialogueId: 3
   optionButton1: {fileID: 0}
   optionButton2: {fileID: 0}
   optionButton3: {fileID: 0}
@@ -18647,6 +18663,7 @@ MonoBehaviour:
   box: {fileID: 0}
   title: {fileID: 0}
   description: {fileID: 0}
+  startDialogue: 0
   dialogueId: 0
   optionButton1: {fileID: 0}
   optionButton2: {fileID: 0}
