@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main 1.unity
     guid: 6729b2368db5f494a89c944d9bfc4341
+  - enabled: 1
+    path: Assets/Scenes/Northern Station.unity
+    guid: 5e84629d04bdf0647b8d85fea824a658
   m_configObjects: {}
