@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
-    public GameObject panel;
+    public GameObject[] panels;
 
     // Start is called before the first frame update
     void Start()
@@ -37,29 +37,44 @@ public class ButtonManager : MonoBehaviour
 
     public void OpenSettings()
     {
-        panel.SetActive(true);
+        foreach (GameObject panel in panels)
+        {
+            panel.SetActive(true);
+        }
+        
     }
 
     public void CloseSettings()
     {
-        panel.SetActive(false);
+        foreach (GameObject panel in panels)
+        {
+            panel.SetActive(false);
+        }
     }
 
     public void OpenClose()
     {
-        panel.SetActive(!panel.activeSelf);
+        foreach (GameObject panel in panels)
+        {
+            panel.SetActive(!panel.activeSelf);
+        }
+            
     }
 
     public void OpenInventory()
     {
-        if (!panel.activeSelf)
+        foreach (GameObject panel in panels)
         {
-            panel.SetActive(true);
-            transform.parent.GetComponent<InventoryManager>().UpdateInventory();
+            if (!panel.activeSelf)
+            {
+                panel.SetActive(true);
+                transform.parent.GetComponent<InventoryManager>().UpdateInventory();
+            }
+            else
+            {
+                panel.SetActive(false);
+            }
         }
-        else
-        {
-            panel.SetActive(false);
-        }
+            
     }
 }
