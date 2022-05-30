@@ -152,13 +152,15 @@ public class Database : ScriptableObject
     {
         public string sourceName;
         public string name;
+        public string description;
         public int objCount;
         public QuestObjective[] objectives;
 
-        public Quest(string _source, string _name, int _count, QuestObjective[] _objectives)
+        public Quest(string _source, string _name, string _description, int _count, QuestObjective[] _objectives)
         {
             sourceName = _source;
             name = _name;
+            description = _description;
             objCount = _count;
             objectives = _objectives;
         }
@@ -189,8 +191,8 @@ public class Database : ScriptableObject
 
     public static Dictionary<int, Quest> questDatabase = new Dictionary<int, Quest>()
     {
-        { 1, new Quest("Beggar", "Quest1", 1, new ItemObjective[] {new ItemObjective(1, 1, "Get a burger") }) },
-        { 2, new Quest(null, "Quest2", 1, new InteractObjective[] {new InteractObjective("Beggar", 0, 1, "Give a burger to hobo")}) }
+        { 1, new Quest("Beggar", "Quest1", "The hobo wants something to eat. A burger should do nicely.", 1, new ItemObjective[] {new ItemObjective(1, 1, "Get a burger") }) },
+        { 2, new Quest(null, "Quest2", "You got the burger. All you need to do now is bring it to the hobo.", 1, new InteractObjective[] {new InteractObjective("Beggar", 0, 1, "Give a burger to hobo")}) }
     };
 
     public static Dictionary<int, Dialogue> dialogueDatabase = new Dictionary<int, Dialogue>()
