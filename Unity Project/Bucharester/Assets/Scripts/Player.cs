@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
 
     public Image[] hearts;
 
+  
+
     private void Start()
     {
         UpdateHearts();
