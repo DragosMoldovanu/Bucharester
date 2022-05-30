@@ -8,6 +8,7 @@ public class QuestManager : MonoBehaviour
     public List<int> activeQuests;
     public List<int> completedQuests;
     public InventoryManager inventory;
+    public GameObject questLabel;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,15 @@ public class QuestManager : MonoBehaviour
                     }
                 }
             }
+        }
+
+        if (activeQuests.Count == 0)
+        {
+            questLabel.SetActive(false);
+        }
+        else
+        {
+            questLabel.SetActive(true);
         }
     }
 
