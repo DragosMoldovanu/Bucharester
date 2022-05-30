@@ -7,6 +7,7 @@ public class LogQuestManager : MonoBehaviour
     public QuestManager questManager;
     public GameObject questContainer;
     public GameObject questPrefab;
+    public GameObject questDetails;
 
     void OnEnable()
     {
@@ -25,7 +26,8 @@ public class LogQuestManager : MonoBehaviour
             {
                 description += "- " + obj.description + "\n";
             }
-            quest.GetComponent<LogQuestController>().SetData(false, questData.name, description);
+            quest.GetComponent<LogQuestController>().SetData(id, false, questData.name, description);
+            quest.GetComponent<LogQuestController>().questDetails = questDetails;
         }
 
         foreach (int id in questManager.completedQuests)
@@ -38,7 +40,8 @@ public class LogQuestManager : MonoBehaviour
             {
                 description += "- " + obj.description + "\n";
             }
-            quest.GetComponent<LogQuestController>().SetData(true, questData.name, description);
+            quest.GetComponent<LogQuestController>().SetData(id, true, questData.name, description);
+            quest.GetComponent<LogQuestController>().questDetails = questDetails;
         }
     }
 }

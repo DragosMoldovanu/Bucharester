@@ -10,10 +10,27 @@ public class LogQuestController : MonoBehaviour
     public Text description;
     public GameObject completeVeil;
 
-    public void SetData(bool _complete, string _title, string _description)
+    public GameObject questDetails;
+    private int id;
+
+    public void SetData(int _id, bool _complete, string _title, string _description)
     {
+        id = _id;
         completeVeil.SetActive(_complete);
         title.text = _title;
         description.text = _description;
+    }
+
+    public void OpenDetails()
+    {
+        questDetails.SetActive(true);
+
+        string desc = Database.questDatabase[id].description + "\n\n";
+        foreach (Database.QuestObjective obj in Database.questDatabase[id].objectives)
+        {
+            desc += "- " + obj.description + "\n";
+        }
+
+        questDetails.transform.GetChild(0).GetComponent<QuestDetailsController>().SetData(completeVeil.activeSelf, title.text, desc);
     }
 }

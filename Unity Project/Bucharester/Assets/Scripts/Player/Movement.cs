@@ -27,28 +27,32 @@ public class Movement : MonoBehaviour
             direction = Vector3.zero;
             if (Input.GetKey(KeyCode.W))
             {
-                squashStretchAnimator.SetTrigger("Walk");
                 direction += (transform.up + transform.forward).normalized;
             }
             if (Input.GetKey(KeyCode.S))
             {
-                squashStretchAnimator.SetTrigger("Walk");
                 direction -= (transform.up + transform.forward).normalized;
             }
             if (Input.GetKey(KeyCode.A))
             {
-                squashStretchAnimator.SetTrigger("Walk");
                 direction -= transform.right;
             }
             if (Input.GetKey(KeyCode.D))
             {
-                squashStretchAnimator.SetTrigger("Walk");
+                
                 direction += transform.right;
             }
             if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
             {
-                squashStretchAnimator.SetTrigger("Idle");
+                if (squashStretchAnimator != null)
+                {
+                    squashStretchAnimator.SetTrigger("Idle");
+                }
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+            else if (squashStretchAnimator != null)
+            {
+                squashStretchAnimator.SetTrigger("Walk");
             }
 
             transform.position += direction * speed * Time.deltaTime;
