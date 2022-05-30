@@ -518,7 +518,7 @@ AudioSource:
   m_GameObject: {fileID: 60313020}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: dfafd7e9d82ae0440897283d5d27a69a, type: 2}
   m_audioClip: {fileID: 8300000, guid: 73393d0699187194daab243494f83b22, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -2727,7 +2727,7 @@ AudioSource:
   m_GameObject: {fileID: 269591540}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: dfafd7e9d82ae0440897283d5d27a69a, type: 2}
   m_audioClip: {fileID: 8300000, guid: f3afe0a6a0426c44d8f95c8b0521ba91, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -4553,7 +4553,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8229,7 +8229,7 @@ AudioSource:
   m_GameObject: {fileID: 855240870}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: dfafd7e9d82ae0440897283d5d27a69a, type: 2}
   m_audioClip: {fileID: 8300000, guid: 4838e71280ead954d9f1a888ae2fd63c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -12988,7 +12988,7 @@ GameObject:
   - component: {fileID: 1242187432}
   - component: {fileID: 1242187431}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: VendingMachines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13003,7 +13003,7 @@ AudioSource:
   m_GameObject: {fileID: 1242187430}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: dfafd7e9d82ae0440897283d5d27a69a, type: 2}
   m_audioClip: {fileID: 8300000, guid: cfb2b7d46d6c4d0408736fbe77b0fe2b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -13097,12 +13097,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242187430}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.53, y: 0.21, z: -6.09}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 11.369276, y: 18.973976, z: 23.91499}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 1865069885}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1246280438
 GameObject:
@@ -17513,6 +17513,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1648686505}
   - component: {fileID: 1648686506}
+  - component: {fileID: 1648686507}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -17586,13 +17587,38 @@ MonoBehaviour:
   m_FillRect: {fileID: 381900281}
   m_HandleRect: {fileID: 2023687171}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1648686507}
+        m_TargetAssemblyTypeName: SetVolume, Assembly-CSharp
+        m_MethodName: SetLevel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1648686507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648686504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e09624e32004e0498d32a9dce6c6087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: dfafd7e9d82ae0440897283d5d27a69a, type: 2}
 --- !u!1001 &1651291137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19449,7 +19475,7 @@ AudioSource:
   m_GameObject: {fileID: 1791255183}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: dfafd7e9d82ae0440897283d5d27a69a, type: 2}
   m_audioClip: {fileID: 8300000, guid: 7680c625242ddb64e8120ab957c69f88, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -20352,7 +20378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1848365381
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20579,6 +20605,7 @@ Transform:
   - {fileID: 1791255185}
   - {fileID: 269591542}
   - {fileID: 60313022}
+  - {fileID: 1242187432}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22227,8 +22254,8 @@ RectTransform:
   m_Father: {fileID: 1486441672}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
