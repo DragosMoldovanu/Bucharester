@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
 {
     public float acceleration;
     public float speed;
+    public float collisionBoundary;
 
     public bool canMove = true;
     public Vector3 direction;
@@ -39,7 +40,6 @@ public class Movement : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.D))
             {
-                
                 direction += transform.right;
             }
             if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
@@ -55,9 +55,17 @@ public class Movement : MonoBehaviour
                 squashStretchAnimator.SetTrigger("Walk");
             }
 
-            transform.position += direction * speed * Time.deltaTime;
+            Debug.DrawRay(transform.position, direction.normalized * collisionBoundary);
+            RaycastHit hit;
+            if (!Physics.Raycast(transform.position, direction, out hit, collisionBoundary))
+            {
+                transform.position += direction * speed * Time.deltaTime;
+            }
+            else
+            {
+                //Debug.Log(hit.collider.gameObject.name);
+            }
         }
-       
     }
 
     void FixedUpdate()
