@@ -185,14 +185,22 @@ public class Database : ScriptableObject
 
     public static Dictionary<int, ItemData> itemDatabase = new Dictionary<int, ItemData>()
     {
-        { 1, new ItemData("burger", "Burger", "Classic WcDonalds hamburger. Why do they always look better in the ads?", true) },
-        { 2, new ItemData("soda", "Soda", "Postpone your hunger with a sugary drink!", true) }
+        { 1, new ItemData("burger", "Burger", "This tiny burger can also travel through thick walls.", true) },
+        { 2, new ItemData("burger", "Soda", "This was definitely not made in China.", true) },
+        { 3, new ItemData("soda", "Soda", "Refreshing sugary beverage, timed bomb, who knows what else.", true) },
+        { 4, new ItemData("burger", "Cold Sandwitch", "May not be tasty, but at lesat it does its job, who needs laxatives anymore?", true) },
+        { 5, new ItemData("burger", "Chocolate Bar", "Once a slice of heaven, now a reminder of hell.", true) },
+
+        { 6, new ItemData("soda", "Files", "A tree named Greet might have been hurt in the process", false) }
     };
 
     public static Dictionary<int, Quest> questDatabase = new Dictionary<int, Quest>()
     {
-        { 1, new Quest("Beggar", "Quest1", "The hobo wants something to eat. A burger should do nicely.", 1, new ItemObjective[] {new ItemObjective(1, 1, "Get a burger") }) },
-        { 2, new Quest(null, "Quest2", "You got the burger. All you need to do now is bring it to the hobo.", 1, new InteractObjective[] {new InteractObjective("Beggar", 0, 1, "Give a burger to hobo")}) }
+        { 1, new Quest(null, "Welcome to Bucharest", "Welcome to Bucharest!", 1, new QuestObjective[] {new InteractObjective("mom", 0, 1, "Answer mom's text")}) },
+        { 2, new Quest(null, "What Remains", "Pick up what remains of your baggages", 1, new QuestObjective[] {new ItemObjective(6, 3, "Pick up remaining baggages")}) },
+        { 3, new Quest(null, "Ride Home", "Find a ride to leave the train station", 1, new QuestObjective[] {new InteractObjective("Taxi Guy", 0, 1, "Find a taxi")}) },
+        { 100, new Quest("Beggar", "Quest1", "The hobo wants something to eat. A burger should do nicely.", 1, new QuestObjective[] {new ItemObjective(1, 1, "Get a burger")}) },
+        { 200, new Quest(null, "Quest2", "You got the burger. All you need to do now is bring it to the hobo.", 1, new QuestObjective[] {new InteractObjective("Beggar", 0, 1, "Give a burger to hobo")}) },
     };
 
     public static Dictionary<int, Dialogue> dialogueDatabase = new Dictionary<int, Dialogue>()
