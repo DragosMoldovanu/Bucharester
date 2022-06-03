@@ -63,7 +63,7 @@ public class Movement : MonoBehaviour
             }
             else
             {
-                //Debug.Log(hit.collider.gameObject.name);
+                Debug.Log(hit.collider.gameObject.name);
             }
         }
     }
