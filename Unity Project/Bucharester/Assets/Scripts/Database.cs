@@ -133,7 +133,7 @@ public class Database : ScriptableObject
         }
     }
 
-    public class InteractObjective: QuestObjective
+    public class InteractObjective : QuestObjective
     {
         public string name;
         public int index;
@@ -145,6 +145,17 @@ public class Database : ScriptableObject
             index = _index;
             option = _option;
             description = _description;
+        }
+    }
+
+    public class MoneyObjective : QuestObjective
+    {
+        public int quantity;
+
+        public MoneyObjective(int quantity, string _description)
+        {
+            this.quantity = quantity;
+            this.description = _description;
         }
     }
 
@@ -196,11 +207,19 @@ public class Database : ScriptableObject
 
     public static Dictionary<int, Quest> questDatabase = new Dictionary<int, Quest>()
     {
-        { 1, new Quest(null, "Welcome to Bucharest", "Welcome to Bucharest!", 1, new QuestObjective[] {new InteractObjective("mom", 0, 1, "Answer mom's text")}) },
-        { 2, new Quest(null, "What Remains", "Pick up what remains of your baggages", 1, new QuestObjective[] {new ItemObjective(6, 3, "Pick up remaining baggages")}) },
+        { 1, new Quest(null, "Welcome to Bucharest", "Welcome to Bucharest!", 1, new QuestObjective[] {new InteractObjective("Mom", 0, 1, "Answer mom's text")}) },
+        { 2, new Quest(null, "What Remains", "Pick up your backpack", 1, new QuestObjective[] {new InteractObjective("Backpack", 0, 1, "Pick up your backpack")}) },
         { 3, new Quest(null, "Ride Home", "Find a ride to leave the train station", 1, new QuestObjective[] {new InteractObjective("Taxi Guy", 0, 1, "Find a taxi")}) },
-        { 100, new Quest("Beggar", "Quest1", "The hobo wants something to eat. A burger should do nicely.", 1, new QuestObjective[] {new ItemObjective(1, 1, "Get a burger")}) },
-        { 200, new Quest(null, "Quest2", "You got the burger. All you need to do now is bring it to the hobo.", 1, new QuestObjective[] {new InteractObjective("Beggar", 0, 1, "Give a burger to hobo")}) },
+        { 4, new Quest(null, "Pennyless", "Get enough money for the taxi ride", 1, new QuestObjective[] {new MoneyObjective(70, "Get 200 bucks for taxi")}) },
+
+        { 5, new Quest("Taxi Guy 2", "Good Idea", "That weird guy is right, it might be a good idea to call and ask for money.", 1, new QuestObjective[] {new InteractObjective("Mom", 0, 1, "Ask your mom for money")}) },
+        { 6, new Quest(null, "To The Bank!", "Go to the ATM and get the money sent to you", 1, new QuestObjective[] {new InteractObjective("ATM", 0, 1, "Get money from ATM")}) },
+
+        { 7, new Quest("Diana", "More Papers!", "This girl needs some papers copied for.. some reason.", 1, new QuestObjective[] {new InteractObjective("Printer", 0, 1, "Find a printer to copy papers")}) },
+        { 8, new Quest(null, "Papers, Please!", "Now that you got all the papers, all that is left to do is deliver them", 1, new QuestObjective[] {new InteractObjective("Diana", 0, 1, "Bring papers back")}) },
+
+        { 9, new Quest("Beggar", "Quest1", "The hobo wants something to eat. A burger should do nicely.", 1, new QuestObjective[] {new ItemObjective(1, 1, "Get a burger")}) },
+        { 10, new Quest(null, "Quest2", "You got the burger. All you need to do now is bring it to the hobo.", 1, new QuestObjective[] {new InteractObjective("Beggar", 0, 1, "Give a burger to hobo")}) },
     };
 
     public static Dictionary<int, Dialogue> dialogueDatabase = new Dictionary<int, Dialogue>()
@@ -225,6 +244,13 @@ public class Database : ScriptableObject
 
     public static List<Questline> questlineDatabase = new List<Questline>()
     {
-        new Questline(2, new int[] {1, 2})
+        new Questline(3, new int[] {1, 2, 3})
     };
+
+    public static List<string> contactsDatabase = new List<string>()
+    {
+        "Mom"
+    };
+
+    public static int startingQuest = 1;
 }
