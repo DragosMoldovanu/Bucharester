@@ -27,7 +27,7 @@ public class DialogueOption : MonoBehaviour
 
     void Start()
     {
-        box = GameObject.Find("DialogueBox");
+        box = GameObject.Find("DialogueFade");
         player = GameObject.Find("Player");
     }
 
