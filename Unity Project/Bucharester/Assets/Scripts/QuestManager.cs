@@ -39,6 +39,24 @@ public class QuestManager : MonoBehaviour
                         CompleteQuest(id);
                     }
                 }
+                else if (obj is Database.InventoryUnlockObjective)
+                {
+                    Debug.Log(Database.inventoryUnlocked);
+                    Debug.Log(id);
+                    foreach (int stuff in activeQuests)
+                        Debug.Log(stuff);
+                    if (Database.inventoryUnlocked)
+                    {
+                        CompleteQuest(id);
+                    }
+                }
+                else if (obj is Database.MoneyUnlockObjective)
+                {
+                    if (Database.moneyUnlocked)
+                    {
+                        CompleteQuest(id);
+                    }
+                }
             }
         }
 

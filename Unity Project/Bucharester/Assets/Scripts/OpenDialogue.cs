@@ -84,6 +84,16 @@ public class OpenDialogue : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+            else if (effect is Database.EnableInventoryEffect)
+            {
+                GameObject.Find("Inventory").GetComponent<InventoryManager>().EnableInventory();
+                Database.inventoryUnlocked = true;
+            }
+            else if (effect is Database.EnableMoneyEffect)
+            {
+                GameObject.Find("Stats").GetComponent<StatsManager>().EnableMoney();
+                Database.moneyUnlocked = true;
+            }
         }
 
         if (dialogue.option1 != null)

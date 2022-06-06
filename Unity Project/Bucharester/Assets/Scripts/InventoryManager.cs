@@ -23,6 +23,9 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public GameObject inventoryTab;
+    public GameObject inventoryButton;
+
     public GameObject inventoryGrid;
     public GameObject itemPrefab;
     public int inventorySize;
@@ -45,6 +48,12 @@ public class InventoryManager : MonoBehaviour
     void OnEnable()
     {
         //UpdateInventory();
+    }
+
+    public void EnableInventory()
+    {
+        inventoryButton.SetActive(true);
+        inventoryTab.SetActive(true);
     }
 
     public int ItemCount(int itemId)
