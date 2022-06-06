@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class StatsManager : MonoBehaviour
 {
+    public GameObject moneyIcon;
+
     public Text money;
     public Slider hunger;
     public float hungerPerSecond;
@@ -27,6 +29,11 @@ public class StatsManager : MonoBehaviour
         {
             UpdateHunger(-hungerPerSecond * Time.deltaTime);
         }
+    }
+
+    public void EnableMoney()
+    {
+        moneyIcon.SetActive(true);
     }
 
     public void UpdateMoney(int amount)

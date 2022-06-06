@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SpawnDataObject", order = 1)]
 public class Database : ScriptableObject
 {
+    public static bool inventoryUnlocked = false;
+    public static bool moneyUnlocked = false;
+
     public class ItemData
     {
         public string sprite;
@@ -78,6 +81,11 @@ public class Database : ScriptableObject
     }
 
     public class EnableInventoryEffect: DialogueEffect
+    {
+
+    }
+
+    public class EnableMoneyEffect: DialogueEffect
     {
 
     }
@@ -164,6 +172,22 @@ public class Database : ScriptableObject
         }
     }
 
+    public class InventoryUnlockObjective : QuestObjective
+    {
+        public InventoryUnlockObjective(string _description)
+        {
+            description = _description;
+        }
+    }
+
+    public class MoneyUnlockObjective : QuestObjective
+    {
+        public MoneyUnlockObjective(string _description)
+        {
+            description = _description;
+        }
+    }
+
     public class Quest
     {
         public string sourceName;
@@ -213,18 +237,19 @@ public class Database : ScriptableObject
     public static Dictionary<int, Quest> questDatabase = new Dictionary<int, Quest>()
     {
         { 1, new Quest(null, "Welcome to Bucharest", "Welcome to Bucharest!", 1, new QuestObjective[] {new InteractObjective("Mom", 0, 1, "Answer mom's text")}) },
-        { 2, new Quest(null, "What Remains", "Pick up your backpack", 1, new QuestObjective[] {new InteractObjective("Backpack", 0, 1, "Pick up your backpack")}) },
-        { 3, new Quest(null, "Ride Home", "Find a ride to leave the train station", 1, new QuestObjective[] {new InteractObjective("Taxi Guy", 0, 1, "Find a taxi")}) },
-        { 4, new Quest(null, "Pennyless", "Get enough money for the taxi ride", 1, new QuestObjective[] {new MoneyObjective(70, "Get 200 bucks for taxi")}) },
+        { 2, new Quest(null, "What Remains", "Pick up your backpack", 1, new QuestObjective[] {new InventoryUnlockObjective("Pick up your backpack")}) },
+        { 3, new Quest(null, "Five Dollar Man", "Pick up your wallet", 1, new QuestObjective[] {new MoneyUnlockObjective("Pick up your wallet")}) },
+        { 4, new Quest(null, "Ride Home", "Find a ride to leave the train station", 1, new QuestObjective[] {new InteractObjective("Taxi Guy", 0, 1, "Find a taxi")}) },
+        { 5, new Quest(null, "Pennyless", "Get enough money for the taxi ride", 1, new QuestObjective[] {new MoneyObjective(70, "Get 200 bucks for taxi")}) },
 
-        { 5, new Quest("Taxi Guy 2", "Good Idea", "That weird guy is right, it might be a good idea to call and ask for money.", 1, new QuestObjective[] {new InteractObjective("Mom", 0, 1, "Ask your mom for money")}) },
-        { 6, new Quest(null, "To The Bank!", "Go to the ATM and get the money sent to you", 1, new QuestObjective[] {new InteractObjective("ATM", 0, 1, "Get money from ATM")}) },
+        { 6, new Quest("Taxi Guy 2", "Good Idea", "That weird guy is right, it might be a good idea to call and ask for money.", 1, new QuestObjective[] {new InteractObjective("Mom", 0, 1, "Ask your mom for money")}) },
+        { 7, new Quest(null, "To The Bank!", "Go to the ATM and get the money sent to you", 1, new QuestObjective[] {new InteractObjective("ATM", 0, 1, "Get money from ATM")}) },
 
-        { 7, new Quest("Diana", "More Papers!", "This girl needs some papers copied for.. some reason.", 1, new QuestObjective[] {new InteractObjective("Printer", 0, 1, "Find a printer to copy papers")}) },
-        { 8, new Quest(null, "Papers, Please!", "Now that you got all the papers, all that is left to do is deliver them", 1, new QuestObjective[] {new InteractObjective("Diana", 0, 1, "Bring papers back")}) },
+        { 8, new Quest("Diana", "More Papers!", "This girl needs some papers copied for.. some reason.", 1, new QuestObjective[] {new InteractObjective("Printer", 0, 1, "Find a printer to copy papers")}) },
+        { 9, new Quest(null, "Papers, Please!", "Now that you got all the papers, all that is left to do is deliver them", 1, new QuestObjective[] {new InteractObjective("Diana", 0, 1, "Bring papers back")}) },
 
-        { 9, new Quest("Beggar", "Quest1", "The hobo wants something to eat. A burger should do nicely.", 1, new QuestObjective[] {new ItemObjective(1, 1, "Get a burger")}) },
-        { 10, new Quest(null, "Quest2", "You got the burger. All you need to do now is bring it to the hobo.", 1, new QuestObjective[] {new InteractObjective("Beggar", 0, 1, "Give a burger to hobo")}) },
+        { 10, new Quest("Beggar", "Quest1", "The hobo wants something to eat. A burger should do nicely.", 1, new QuestObjective[] {new ItemObjective(1, 1, "Get a burger")}) },
+        { 11, new Quest(null, "Quest2", "You got the burger. All you need to do now is bring it to the hobo.", 1, new QuestObjective[] {new InteractObjective("Beggar", 0, 1, "Give a burger to hobo")}) },
     };
 
     public static Dictionary<int, Dialogue> dialogueDatabase = new Dictionary<int, Dialogue>()
@@ -235,7 +260,10 @@ public class Database : ScriptableObject
         { 4, new Dialogue(4, new List<DialogueEffect>(), "Mom", "I'm a bit busy dear. We'll talk later.", null, "Okay...", null) },
 
         { 5, new Dialogue(5, new List<DialogueEffect>(), "Backpack", "Your backpack lies on the ground. It's open and empty. All of its contents are gone.", "Take it", null, "Hold on") },
-        { 6, new Dialogue(6, new List<DialogueEffect>() { new QuestEffect(2, false, true), new EnableInventoryEffect(), new DestroyEffect() }, "Backpack", "You got your backpack back, for what it's worth", null, "Great...", null) }
+        { 6, new Dialogue(6, new List<DialogueEffect>() { new QuestEffect(2, false, true), new EnableInventoryEffect(), new DestroyEffect() }, "Backpack", "You got your backpack back, for what it's worth", null, "Great...", null) },
+
+        { 7, new Dialogue(7, new List<DialogueEffect>(), "Wallet", "Your wallet lies randomly tossed on the ground. It's all dusty and dirty.", "Take it", null, "Hold on") },
+        { 8, new Dialogue(8, new List<DialogueEffect>() { new QuestEffect(3, false, true), new EnableMoneyEffect(), new DestroyEffect() }, "Wallet", "You got your wallet back. Not that there is much left in it", null, "Alright...", null) }
 
         //{ 1, new Dialogue(1, new List<DialogueEffect>() { new QuestEffect(1, true, false) }, "Hobo", "Hey, you got anything to eat?", "Sure", null, "Sorry, I don't" ) },
         //{ 2, new Dialogue(2, new List<DialogueEffect>() { new QuestEffect(2, false, true), new ItemEffect(1, -1), new ChangeEffect(5) }, "Hobo", "Thanks mate", null, "No Problem", null) },
@@ -253,7 +281,10 @@ public class Database : ScriptableObject
         { 4, new TreeNode(dialogueDatabase[4], -1, -1, -1) },
 
         { 5, new TreeNode(dialogueDatabase[5], 6, -1, -1) },
-        { 6, new TreeNode(dialogueDatabase[6], -1, -1, -1) }
+        { 6, new TreeNode(dialogueDatabase[6], -1, -1, -1) },
+
+        { 7, new TreeNode(dialogueDatabase[7], 8, -1, -1) },
+        { 8, new TreeNode(dialogueDatabase[8], -1, -1, -1) }
 
         //{ 1, new TreeNode( dialogueDatabase[1], 2, -1, -1) },
         //{ 2, new TreeNode( dialogueDatabase[2], -1, -1, -1) },
@@ -265,7 +296,7 @@ public class Database : ScriptableObject
 
     public static List<Questline> questlineDatabase = new List<Questline>()
     {
-        new Questline(3, new int[] {1, 2, 3})
+        new Questline(3, new int[] {1, 2, 3, 4, 5})
     };
 
     public static Dictionary<string, int> contactsDatabase = new Dictionary<string, int>()
