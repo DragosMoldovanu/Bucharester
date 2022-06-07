@@ -296,7 +296,7 @@ public class Database : ScriptableObject
 
     public static List<Questline> questlineDatabase = new List<Questline>()
     {
-        new Questline(3, new int[] {1, 2, 3, 4, 5})
+        new Questline(5, new int[] {1, 2, 3, 4, 5})
     };
 
     public static Dictionary<string, int> contactsDatabase = new Dictionary<string, int>()

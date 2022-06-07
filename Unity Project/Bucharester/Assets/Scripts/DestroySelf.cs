@@ -19,4 +19,9 @@ public class DestroySelf : MonoBehaviour
     {
         Destroy(gameObject, seconds);
     }
+
+    public void RemoveActiveQuest()
+    {
+        GameObject.Find("QuestList").GetComponent<QuestManager>().RemoveFromActiveQuests(GetComponent<QuestController>().id);
+    }
 }

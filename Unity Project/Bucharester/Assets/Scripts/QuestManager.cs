@@ -41,10 +41,6 @@ public class QuestManager : MonoBehaviour
                 }
                 else if (obj is Database.InventoryUnlockObjective)
                 {
-                    Debug.Log(Database.inventoryUnlocked);
-                    Debug.Log(id);
-                    foreach (int stuff in activeQuests)
-                        Debug.Log(stuff);
                     if (Database.inventoryUnlocked)
                     {
                         CompleteQuest(id);
@@ -84,7 +80,6 @@ public class QuestManager : MonoBehaviour
         if (activeQuests.Contains(id))
         {
             DeleteActiveQuest(id);
-            activeQuests.Remove(id);
             completedQuests.Add(id);
             NextQuest(id);
         }
@@ -100,7 +95,7 @@ public class QuestManager : MonoBehaviour
         {
             objectives[i] = quest.objectives[i].description;
         }
-        newQuest.GetComponent<QuestController>().SetQuestData(quest.name, quest.objCount, objectives);
+        newQuest.GetComponent<QuestController>().SetQuestData(id, quest.name, quest.objCount, objectives);
     }
 
     private void DeleteActiveQuest(int id)
@@ -114,6 +109,11 @@ public class QuestManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void RemoveFromActiveQuests(int id)
+    {
+        activeQuests.Remove(id);
     }
 
     private void NextQuest(int id)

@@ -8,8 +8,11 @@ public class QuestController : MonoBehaviour
     public Text questTitle;
     public Text questObjectives;
 
-    public void SetQuestData(string title, int objCount, string[] objectives)
+    public int id;
+
+    public void SetQuestData(int _id, string title, int objCount, string[] objectives)
     {
+        id = _id;
         questTitle.text = title;
 
         questObjectives.text = "";
