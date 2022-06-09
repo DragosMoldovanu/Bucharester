@@ -108,6 +108,23 @@ public class OpenDialogue : MonoBehaviour
                         optionButton1.GetComponent<DialogueOption>().affectsQuest = true;
                         optionButton1.GetComponent<DialogueOption>().interactName = name;
                         optionButton1.GetComponent<DialogueOption>().questId = (effect as Database.QuestEffect).questId;
+
+                        if ((effect as Database.QuestEffect).accept == true)
+                        {
+                            int questId = (effect as Database.QuestEffect).questId;
+                            QuestManager questManager = GameObject.Find("QuestList").GetComponent<QuestManager>();
+                            foreach (Database.Questline questline in Database.questlineDatabase)
+                            {
+                                for (int i = 0; i < questline.questCount - 1; i++)
+                                {
+                                    Debug.Log(questline.questIds[i] + " " + questline.questIds[i + 1]);
+                                    if (questline.questIds[i + 1] == questId && !questManager.completedQuests.Contains(questline.questIds[i]))
+                                    {
+                                        optionButton1.SetActive(false);
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     if (effect is Database.ItemEffect)
@@ -154,6 +171,22 @@ public class OpenDialogue : MonoBehaviour
                         optionButton2.GetComponent<DialogueOption>().affectsQuest = true;
                         optionButton2.GetComponent<DialogueOption>().interactName = name;
                         optionButton2.GetComponent<DialogueOption>().questId = (effect as Database.QuestEffect).questId;
+
+                        if ((effect as Database.QuestEffect).accept == true)
+                        {
+                            int questId = (effect as Database.QuestEffect).questId;
+                            QuestManager questManager = GameObject.Find("QuestList").GetComponent<QuestManager>();
+                            foreach (Database.Questline questline in Database.questlineDatabase)
+                            {
+                                for (int i = 0; i < questline.questCount - 1; i++)
+                                {
+                                    if (questline.questIds[i + 1] == questId && !questManager.completedQuests.Contains(questline.questIds[i]))
+                                    {
+                                        optionButton2.SetActive(false);
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     if (effect is Database.ItemEffect)
@@ -200,6 +233,22 @@ public class OpenDialogue : MonoBehaviour
                         optionButton3.GetComponent<DialogueOption>().affectsQuest = true;
                         optionButton3.GetComponent<DialogueOption>().interactName = name;
                         optionButton3.GetComponent<DialogueOption>().questId = (effect as Database.QuestEffect).questId;
+
+                        if ((effect as Database.QuestEffect).accept == true)
+                        {
+                            int questId = (effect as Database.QuestEffect).questId;
+                            QuestManager questManager = GameObject.Find("QuestList").GetComponent<QuestManager>();
+                            foreach (Database.Questline questline in Database.questlineDatabase)
+                            {
+                                for (int i = 0; i < questline.questCount - 1; i++)
+                                {
+                                    if (questline.questIds[i + 1] == questId && !questManager.completedQuests.Contains(questline.questIds[i]))
+                                    {
+                                        optionButton3.SetActive(false);
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     if (effect is Database.ItemEffect)

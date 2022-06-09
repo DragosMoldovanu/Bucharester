@@ -48,6 +48,18 @@ public class DialogueOption : MonoBehaviour
                 return;
             }
         }
+
+        if (changesMoney)
+        {
+            if (quantity < 0)
+            {
+                if (stats.GetComponent<StatsManager>().moneyAmount < Mathf.Abs(quantity))
+                {
+                    GetComponent<Button>().interactable = false;
+                    return;
+                }
+            }
+        }
         GetComponent<Button>().interactable = true;
     }
 

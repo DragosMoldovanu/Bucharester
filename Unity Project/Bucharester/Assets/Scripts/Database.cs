@@ -75,6 +75,18 @@ public class Database : ScriptableObject
         }
     }
 
+    public class ChangePhoneEffect : DialogueEffect
+    {
+        public string contact;
+        public int newDialogue;
+
+        public ChangePhoneEffect(string contact, int newDialogue)
+        {
+            this.contact = contact;
+            this.newDialogue = newDialogue;
+        }
+    }
+
     public class DestroyEffect : DialogueEffect
     {
 
@@ -240,7 +252,7 @@ public class Database : ScriptableObject
         { 2, new Quest(null, "What Remains", "Pick up your backpack", 1, new QuestObjective[] {new InventoryUnlockObjective("Pick up your backpack")}) },
         { 3, new Quest(null, "Five Dollar Man", "Pick up your wallet", 1, new QuestObjective[] {new MoneyUnlockObjective("Pick up your wallet")}) },
         { 4, new Quest(null, "Ride Home", "Find a ride to leave the train station", 1, new QuestObjective[] {new InteractObjective("Taxi Guy", 0, 1, "Find a taxi")}) },
-        { 5, new Quest(null, "Pennyless", "Get enough money for the taxi ride", 1, new QuestObjective[] {new MoneyObjective(70, "Get 200 bucks for taxi")}) },
+        { 5, new Quest("Taxi Guy", "Pennyless", "Get enough money for the taxi ride", 1, new QuestObjective[] {new MoneyObjective(70, "Get 70 bucks for taxi")}) },
 
         { 6, new Quest("Taxi Guy 2", "Good Idea", "That weird guy is right, it might be a good idea to call and ask for money.", 1, new QuestObjective[] {new InteractObjective("Mom", 0, 1, "Ask your mom for money")}) },
         { 7, new Quest(null, "To The Bank!", "Go to the ATM and get the money sent to you", 1, new QuestObjective[] {new InteractObjective("ATM", 0, 1, "Get money from ATM")}) },
@@ -266,12 +278,20 @@ public class Database : ScriptableObject
         { 8, new Dialogue(8, new List<DialogueEffect>() { new QuestEffect(3, false, true), new EnableMoneyEffect(), new DestroyEffect() }, "Wallet", "You got your wallet back. Not that there is much left in it", null, "Alright...", null) },
 
         { 9, new Dialogue(9, new List<DialogueEffect>(), "Taxi Guy", "Hey kid, need a ride?", "I do actually", null, "Not right now") },
-        { 10, new Dialogue(10, new List<DialogueEffect>(), "Taxi Guy", "Alright, where to?", "College dorms please", "Home", "Nevermind") },
+        { 10, new Dialogue(10, new List<DialogueEffect>() { new ChangeEffect(10) }, "Taxi Guy", "Alright, where to?", "College dorms please", "Home", "Nevermind") },
         { 11, new Dialogue(11, new List<DialogueEffect>(), "Taxi Guy", "Look kid, I don't know where your home is. Come back when you've made up your mind as to where you wanna go.", "Sorry, to the college dorms please.", null, "Alright, I'll be back") },
-        { 12, new Dialogue(12, new List<DialogueEffect>(), "Taxi Guy", "Alright, a ride that far is gonna be 70 bucks.", "*Pay 70 RON for the taxi*", "Umm, I don't have that much", "Yes, I'll give you the money when we get there.") },
+        { 12, new Dialogue(12, new List<DialogueEffect>() { new ChangeEffect(12) }, "Taxi Guy", "Alright, a ride that far is gonna be 70 bucks.", "*Pay 70 RON for the taxi*", "Umm, I don't have that much", "Yes, I'll give you the money when we get there.") },
         { 13, new Dialogue(13, new List<DialogueEffect>(), "Taxi Guy", "Kid, look at yourself for a second. You're a mess. You ain't got a dime on you.", null, "Okay, fine, I don't have it", null) },
-        { 14, new Dialogue(14, new List<DialogueEffect>(), "Taxi Guy", "Well unless you have the money, I ain't taking you anywhere.", null, "Okay, I'll be back.", null) },
-        { 15, new Dialogue(15, new List<DialogueEffect>(), "Taxi Guy", "Good, now hop in already!", null, "*Hop in*", null) }
+        { 14, new Dialogue(14, new List<DialogueEffect>() { new QuestEffect(5, true, false) }, "Taxi Guy", "Well unless you have the money, I ain't taking you anywhere.", null, "Okay, I'll be back.", null) },
+        { 15, new Dialogue(15, new List<DialogueEffect>() { new QuestEffect(4, false, true), new MoneyEffect(-70) }, "Taxi Guy", "Good, now hop in already!", null, "*Hop in*", null) },
+
+        { 16, new Dialogue(16, new List<DialogueEffect>(), "Taxi Guy", "Where to, kid?", "College dorms, please!", null, "Nevermind") },
+        { 17, new Dialogue(17, new List<DialogueEffect>(), "Taxi Guy", "Sure thing. 70 bucks.", "What about 50?", null, "I don't have that much") },
+        { 18, new Dialogue(18, new List<DialogueEffect>(), "Taxi Guy", "Well, can't help you then kid.", "Okay, what about 50?", null, "Goddammit") },
+        { 19, new Dialogue(19, new List<DialogueEffect>() { new QuestEffect(6, true, false), new ChangeEffect(19) }, "Taxi Guy", "Look man, price is fixed. What, your parents don't give you any money?", null, "Hmm, okay then...", null) },
+
+        { 20, new Dialogue(20, new List<DialogueEffect>(), "Mom", "Hey pumpkin, I'm a bit busy. What's up?", "Hey, could you send some money?", null, "Nevermind, let's talk later.") },
+        { 21, new Dialogue(21, new List<DialogueEffect>(), "Mom", "More? Okay, I'll send you some. Try not to spend it so fast though!", null, "Okay, I will, thanks.", null) }
 
         //{ 1, new Dialogue(1, new List<DialogueEffect>() { new QuestEffect(1, true, false) }, "Hobo", "Hey, you got anything to eat?", "Sure", null, "Sorry, I don't" ) },
         //{ 2, new Dialogue(2, new List<DialogueEffect>() { new QuestEffect(2, false, true), new ItemEffect(1, -1), new ChangeEffect(5) }, "Hobo", "Thanks mate", null, "No Problem", null) },
@@ -302,6 +322,14 @@ public class Database : ScriptableObject
         { 14, new TreeNode(dialogueDatabase[14], -1, -1, -1) },
         { 15, new TreeNode(dialogueDatabase[15], -1, -1, -1) },
 
+        { 16, new TreeNode(dialogueDatabase[16], 17, -1, -1) },
+        { 17, new TreeNode(dialogueDatabase[17], 19, -1, 18) },
+        { 18, new TreeNode(dialogueDatabase[18], 19, -1, -1) },
+        { 19, new TreeNode(dialogueDatabase[19], -1, -1, -1) },
+
+        { 20, new TreeNode(dialogueDatabase[20], 21, -1, -1) },
+        { 21, new TreeNode(dialogueDatabase[21], -1, -1, -1) }
+
         //{ 1, new TreeNode( dialogueDatabase[1], 2, -1, -1) },
         //{ 2, new TreeNode( dialogueDatabase[2], -1, -1, -1) },
         //{ 3, new TreeNode( dialogueDatabase[3], 4, -1, -1) },
@@ -312,7 +340,8 @@ public class Database : ScriptableObject
 
     public static List<Questline> questlineDatabase = new List<Questline>()
     {
-        new Questline(5, new int[] {1, 2, 3, 4, 5})
+        new Questline(5, new int[] {1, 2, 3, 4, 5}),
+        new Questline(2, new int[] {6, 7})
     };
 
     public static Dictionary<string, int> contactsDatabase = new Dictionary<string, int>()
