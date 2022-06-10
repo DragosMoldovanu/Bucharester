@@ -8,7 +8,7 @@ public class FollowPlayer : MonoBehaviour
     public float offset;
     public float rotationSpeed;
 
-    private float rotation = 3 * Mathf.PI / 2;
+    private float rotation = 0;
 
     // Start is called before the first frame update
     void Start()

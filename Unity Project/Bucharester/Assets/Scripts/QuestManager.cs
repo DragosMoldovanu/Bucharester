@@ -8,6 +8,7 @@ public class QuestManager : MonoBehaviour
     public List<int> activeQuests;
     public List<int> completedQuests;
     public InventoryManager inventory;
+    public StatsManager stats;
     public GameObject questLabel;
 
     // Start is called before the first frame update
@@ -49,6 +50,14 @@ public class QuestManager : MonoBehaviour
                 else if (obj is Database.MoneyUnlockObjective)
                 {
                     if (Database.moneyUnlocked)
+                    {
+                        CompleteQuest(id);
+                    }
+                }
+                else if (obj is Database.MoneyObjective)
+                {
+                    int quantity = (obj as Database.MoneyObjective).quantity;
+                    if (stats.moneyAmount >= quantity)
                     {
                         CompleteQuest(id);
                     }

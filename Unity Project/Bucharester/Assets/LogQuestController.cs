@@ -9,6 +9,8 @@ public class LogQuestController : MonoBehaviour
     public Text title;
     public Text description;
     public GameObject completeVeil;
+    public Sprite incompleteSprite;
+    public Sprite completeSprite;
 
     public GameObject questDetails;
     private int id;
@@ -19,6 +21,15 @@ public class LogQuestController : MonoBehaviour
         completeVeil.SetActive(_complete);
         title.text = _title;
         description.text = _description;
+
+        if (_complete)
+        {
+            marker.sprite = completeSprite;
+        }
+        else
+        {
+            marker.sprite = incompleteSprite;
+        }
     }
 
     public void OpenDetails()

@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class OpenDialogue : MonoBehaviour
 {
+    private static string lastObject = "";
+    private static int lastId = 0;
     public GameObject player;
 
     [Header("Dialogue")]
+    public Image NPC;
     public GameObject box;
     public Text title;
     public Text description;
@@ -26,9 +29,15 @@ public class OpenDialogue : MonoBehaviour
     // Update is called once per frame
     public void Open(bool startOver = true)
     {
-        player.GetComponent<Movement>().enabled = false;
-        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        box.SetActive(true);
+        if (GameObject.Find("PhoneFade") != null && !Database.contactsDatabase.ContainsKey(name))
+        {
+            return;
+        }
+        if (box.activeSelf && name != lastObject)
+        {
+            return;
+        }
+        lastObject = name;
 
         Database.TreeNode node;
         if (startOver)
@@ -40,6 +49,15 @@ public class OpenDialogue : MonoBehaviour
             node = Database.treeDatabase[dialogueId];
         }
         Database.Dialogue dialogue = node.current;
+
+        if (box.activeSelf && name == lastObject && dialogue.id == startDialogue)
+        {
+            return;
+        }
+
+        player.GetComponent<Movement>().enabled = false;
+        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        box.SetActive(true);
 
         title.text = dialogue.name;
         description.text = dialogue.line;
@@ -110,6 +128,40 @@ public class OpenDialogue : MonoBehaviour
                 int dlg = (effect as Database.ChangePhoneEffect).newDialogue;
                 Database.contactsDatabase[obj] = dlg;
             }
+            else if (effect is Database.QuestObjectEffect)
+            {
+                string obj = (effect as Database.QuestObjectEffect).obj;
+                bool enable = (effect as Database.QuestObjectEffect).enable;
+                if (enable && !Database.questObjects.Contains(obj) && !Database.questedObjects.Contains(obj))
+                {
+                    Database.questObjects.Add(obj);
+                }
+                else
+                {
+                    Database.questObjects.Remove(obj);
+                    Database.questedObjects.Add(obj);
+                }
+            }
+        }
+
+        if (dialogue.sprite != null)
+        {
+            Sprite npcSprite = Resources.Load<Sprite>("Art/Sprites/Characters/" + dialogue.sprite);
+            if (npcSprite != null)
+            {
+                NPC.enabled = true;
+                NPC.sprite = npcSprite;
+            }
+            else
+            {
+                NPC.enabled = false;
+                Debug.Log("NPC Sprite not found");
+            }
+        }
+        else
+        {
+            NPC.enabled = false;
+            NPC.sprite = null;
         }
 
         if (dialogue.option1 != null)

@@ -24,6 +24,7 @@ public class ContactManager : MonoBehaviour
             dialogue.startDialogue = Database.contactsDatabase[contact];
             dialogue.dialogueId = Database.contactsDatabase[contact];
 
+            dialogue.NPC = dialogueData.sprite;
             dialogue.player = dialogueData.player;
             dialogue.box = dialogueData.dialogueBox;
             dialogue.title = dialogueData.title;

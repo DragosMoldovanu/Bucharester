@@ -33,6 +33,15 @@ public class DialogueOption : MonoBehaviour
 
     private void Update()
     {
+        if (GetComponent<Button>().interactable)
+        {
+            transform.GetChild(0).GetComponent<Text>().color = new Color(1, 1, 1);
+        }
+        else
+        {
+            transform.GetChild(0).GetComponent<Text>().color = new Color(0.22f, 0.22f, 0.22f);
+        }
+
         GetComponent<Button>().interactable = true;
         if (changesItem)
         {

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
 {
+    public Image sprite;
     public GameObject player;
     public GameObject dialogueBox;
     public Text title;
@@ -21,6 +22,7 @@ public class ItemManager : MonoBehaviour
             OpenDialogue dialogue = transform.GetChild(i).GetComponent<OpenDialogue>();
             if (dialogue != null)
             {
+                dialogue.NPC = sprite;
                 dialogue.player = player;
                 dialogue.box = dialogueBox;
                 dialogue.title = title;

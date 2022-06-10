@@ -114,19 +114,33 @@ public class Database : ScriptableObject
         }
     }
 
+    public class QuestObjectEffect : DialogueEffect
+    {
+        public string obj;
+        public bool enable;
+
+        public QuestObjectEffect(string obj, bool enable)
+        {
+            this.obj = obj;
+            this.enable = enable;
+        }
+    }
+
     public class Dialogue
     {
         public int id;
         public List<DialogueEffect> effects;
+        public string sprite;
         public string name;
         public string line;
         public string option1;
         public string option2;
         public string option3;
 
-        public Dialogue(int id, List<DialogueEffect> effects, string name, string line, string option1, string option2, string option3)
+        public Dialogue(int id, string sprite, List<DialogueEffect> effects, string name, string line, string option1, string option2, string option3)
         {
             this.id = id;
+            this.sprite = sprite;
             this.effects = effects;
             this.name = name;
             this.line = line;
@@ -247,6 +261,15 @@ public class Database : ScriptableObject
 
 
 
+    public static List<string> questObjects = new List<string>()
+    {
+        "Diana",
+        "Manhole",
+        "WeirdGuy"
+    };
+
+    public static List<string> questedObjects = new List<string>();
+
     public static Dictionary<int, ItemData> itemDatabase = new Dictionary<int, ItemData>()
     {
         { 1, new ItemData("burger", "Burger", "This tiny burger can also travel through thick walls.", true) },
@@ -279,79 +302,75 @@ public class Database : ScriptableObject
         { 11, new Quest(null, "Bon Apetit!", "You got the... food...? All you need to do now is bring it to the hobo.", 1, new QuestObjective[] {new InteractObjective("Manhole", 0, 1, "Give trash burger to hobo")}) },
 
         { 12, new Quest("WeirdGuy", "Strange Request", "The weird guy wants some sort of package. Perhaps you can find one around?", 1, new QuestObjective[] {new ItemObjective(8, 1, "Find the strange package")}) },
-        { 13, new Quest(null, "I it's not Illegal", "You got the package. There's only one thing to do now...", 1, new QuestObjective[] {new InteractObjective("WeirdGuy", 0, 1, "Deliver the package")}) }
+        { 13, new Quest(null, "Is This Legal?", "You got the package. There's only one thing to do now...", 1, new QuestObjective[] {new InteractObjective("WeirdGuy", 0, 1, "Deliver the package")}) }
     };
 
     public static Dictionary<int, Dialogue> dialogueDatabase = new Dictionary<int, Dialogue>()
     {
-        { 1, new Dialogue(1, new List<DialogueEffect>(), "Mom", "Hey, did you get there alright duckling?", "Yeah, everything's fine", null, "Did not have the greatest start...") },
-        { 2, new Dialogue(2, new List<DialogueEffect>() { new QuestEffect(1, false, true), new ChangeEffect(4), new ChangePhoneEffect("Mom", 4), new ChangeStartingDialogueEffect("TaxiGuy", 9) }, "Mom", "Glad to hear. We'll talk more later. Don't forget about the snack I packed you. Love you!", null, "Yeah, thanks. Love you.", null) },
-        { 3, new Dialogue(3, new List<DialogueEffect>() { new QuestEffect(1, false, true), new ChangeEffect(4), new ChangePhoneEffect("Mom", 4), new ChangeStartingDialogueEffect("TaxiGuy", 9) }, "Mom", "Aww, I'm sorry pumpkin. We'll talk more later. Eat the snack I prepared for you and feel better. Love you!", null, "Yeah, thanks. Love you.", null) },
-        { 4, new Dialogue(4, new List<DialogueEffect>(), "Mom", "I'm a bit busy dear. We'll talk later.", null, "Okay...", null) },
+        { 1, new Dialogue(1, "mom", new List<DialogueEffect>(), "Mom", "Hey, did you get there alright duckling?", "Yeah, everything's fine", null, "Did not have the greatest start...") },
+        { 2, new Dialogue(2, "mom", new List<DialogueEffect>() { new QuestEffect(1, false, true), new ChangeEffect(4), new ChangePhoneEffect("Mom", 4), new ChangeStartingDialogueEffect("TaxiGuy", 9), new QuestObjectEffect("TaxiGuy", true) }, "Mom", "Glad to hear. We'll talk more later. Don't forget about the snack I packed you. Love you!", null, "Yeah, thanks. Love you.", null) },
+        { 3, new Dialogue(3, "mom", new List<DialogueEffect>() { new QuestEffect(1, false, true), new ChangeEffect(4), new ChangePhoneEffect("Mom", 4), new ChangeStartingDialogueEffect("TaxiGuy", 9), new QuestObjectEffect("TaxiGuy", true) }, "Mom", "Aww, I'm sorry pumpkin. We'll talk more later. Eat the snack I prepared for you and feel better. Love you!", null, "Yeah, thanks. Love you.", null) },
+        { 4, new Dialogue(4, "mom", new List<DialogueEffect>(), "Mom", "I'm a bit busy dear. We'll talk later.", null, "Okay...", null) },
 
-        { 5, new Dialogue(5, new List<DialogueEffect>(), "Backpack", "Your backpack lies on the ground. It's open and empty. All of its contents are gone.", "Take it", null, "Hold on") },
-        { 6, new Dialogue(6, new List<DialogueEffect>() { new QuestEffect(2, false, true), new EnableInventoryEffect(), new DestroyEffect() }, "Backpack", "You got your backpack back, for what it's worth", null, "Great...", null) },
+        { 5, new Dialogue(5, null, new List<DialogueEffect>(), "Backpack", "Your backpack lies on the ground. It's open and empty. All of its contents are gone.", "Take it", null, "Hold on") },
+        { 6, new Dialogue(6, null, new List<DialogueEffect>() { new QuestEffect(2, false, true), new EnableInventoryEffect(), new DestroyEffect() }, "Backpack", "You got your backpack back, for what it's worth", null, "Great...", null) },
 
-        { 7, new Dialogue(7, new List<DialogueEffect>(), "Wallet", "Your wallet lies randomly tossed on the ground. It's all dusty and dirty. Thankfully they missed your credit card.", "Take it", null, "Hold on") },
-        { 8, new Dialogue(8, new List<DialogueEffect>() { new QuestEffect(3, false, true), new EnableMoneyEffect(), new DestroyEffect(), new ChangeStartingDialogueEffect("ATM", 22) }, "Wallet", "You got your wallet back. Not that there is much left in it", null, "Alright...", null) },
+        { 7, new Dialogue(7, null, new List<DialogueEffect>(), "Wallet", "Your wallet lies randomly tossed on the ground. It's all dusty and dirty. Thankfully they missed your credit card.", "Take it", null, "Hold on") },
+        { 8, new Dialogue(8, null, new List<DialogueEffect>() { new QuestEffect(3, false, true), new EnableMoneyEffect(), new DestroyEffect(), new ChangeStartingDialogueEffect("ATM", 22) }, "Wallet", "You got your wallet back. Not that there is much left in it", null, "Alright...", null) },
 
-        { 9, new Dialogue(9, new List<DialogueEffect>(), "Taxi Guy", "Hey kid, need a ride?", "I do actually", null, "Not right now") },
-        { 10, new Dialogue(10, new List<DialogueEffect>() { new ChangeEffect(10) }, "Taxi Guy", "Alright, where to?", "College dorms please", "Home", "Nevermind") },
-        { 11, new Dialogue(11, new List<DialogueEffect>(), "Taxi Guy", "Look kid, I don't know where your home is. Come back when you've made up your mind as to where you wanna go.", "Sorry, to the college dorms please.", null, "Alright, I'll be back") },
-        { 12, new Dialogue(12, new List<DialogueEffect>() { new ChangeEffect(12) }, "Taxi Guy", "Alright, a ride that far is gonna be 70 bucks.", "*Pay 70 RON for the taxi*", "Umm, I don't have that much", "Yes, I'll give you the money when we get there.") },
-        { 13, new Dialogue(13, new List<DialogueEffect>(), "Taxi Guy", "Kid, look at yourself for a second. You're a mess. You ain't got a dime on you.", null, "Okay, fine, I don't have it", null) },
-        { 14, new Dialogue(14, new List<DialogueEffect>() { new QuestEffect(5, true, false), new ChangeStartingDialogueEffect("TaxiGuy 2", 16) }, "Taxi Guy", "Well unless you have the money, I ain't taking you anywhere.", null, "Okay, I'll be back.", null) },
-        { 15, new Dialogue(15, new List<DialogueEffect>() { new QuestEffect(4, false, true), new MoneyEffect(-70) }, "Taxi Guy", "Good, now hop in already!", null, "*Hop in*", null) },
+        { 9, new Dialogue(9, "taximetrist", new List<DialogueEffect>(), "Taxi Guy", "Hey kid, need a ride?", "I do actually", null, "Not right now") },
+        { 10, new Dialogue(10, "taximetrist", new List<DialogueEffect>() { new ChangeEffect(10) }, "Taxi Guy", "Alright, where to?", "College dorms please", "Home", "Nevermind") },
+        { 11, new Dialogue(11, "taximetrist", new List<DialogueEffect>(), "Taxi Guy", "Look kid, I don't know where your home is. Come back when you've made up your mind as to where you wanna go.", "Sorry, to the college dorms please.", null, "Alright, I'll be back") },
+        { 12, new Dialogue(12, "taximetrist", new List<DialogueEffect>() { new ChangeEffect(12) }, "Taxi Guy", "Alright, a ride that far is gonna be 70 bucks.", "*Pay 70 RON for the taxi*", "Umm, I don't have that much", "Yes, I'll give you the money when we get there.") },
+        { 13, new Dialogue(13, "taximetrist", new List<DialogueEffect>(), "Taxi Guy", "Kid, look at yourself for a second. You're a mess. You ain't got a dime on you.", null, "Okay, fine, I don't have it", null) },
+        { 14, new Dialogue(14, "taximetrist", new List<DialogueEffect>() { new QuestEffect(5, true, false), new ChangeStartingDialogueEffect("TaxiGuy 2", 16), new QuestObjectEffect("TaxiGuy 2", true) }, "Taxi Guy", "Well unless you have the money, I ain't taking you anywhere.", null, "Okay, I'll be back.", null) },
+        { 15, new Dialogue(15, "taximetrist", new List<DialogueEffect>() { new QuestEffect(4, false, true), new MoneyEffect(-70), new QuestObjectEffect("TaxiGuy", false) }, "Taxi Guy", "Good, now hop in already!", null, "*Hop in*", null) },
 
-        { 16, new Dialogue(16, new List<DialogueEffect>(), "Taxi Guy", "Where to, kid?", "College dorms, please!", null, "Nevermind") },
-        { 17, new Dialogue(17, new List<DialogueEffect>(), "Taxi Guy", "Sure thing. 70 bucks.", "What about 50?", null, "I don't have that much") },
-        { 18, new Dialogue(18, new List<DialogueEffect>(), "Taxi Guy", "Well, can't help you then kid.", "Okay, what about 50?", null, "Goddammit") },
-        { 19, new Dialogue(19, new List<DialogueEffect>() { new QuestEffect(6, true, false), new ChangeEffect(19), new ChangePhoneEffect("Mom", 20) }, "Taxi Guy", "Look man, price is fixed. What, your parents don't give you any money?", null, "Hmm, okay then...", null) },
+        { 16, new Dialogue(16, "taximetrist2", new List<DialogueEffect>(), "Taxi Guy", "Where to, kid?", "College dorms, please!", null, "Nevermind") },
+        { 17, new Dialogue(17, "taximetrist2", new List<DialogueEffect>(), "Taxi Guy", "Sure thing. 70 bucks.", "What about 50?", null, "I don't have that much") },
+        { 18, new Dialogue(18, "taximetrist2", new List<DialogueEffect>(), "Taxi Guy", "Well, can't help you then kid.", "Okay, what about 50?", null, "Goddammit") },
+        { 19, new Dialogue(19, "taximetrist2", new List<DialogueEffect>() { new QuestEffect(6, true, false), new ChangeEffect(19), new ChangePhoneEffect("Mom", 20), new QuestObjectEffect("TaxiGuy 2", false) }, "Taxi Guy", "Look man, price is fixed. What, your parents don't give you any money?", null, "Hmm, okay then...", null) },
 
-        { 20, new Dialogue(20, new List<DialogueEffect>(), "Mom", "Hey pumpkin, I'm a bit busy. What's up?", "Hey, could you send some money?", null, "Nevermind, let's talk later.") },
-        { 21, new Dialogue(21, new List<DialogueEffect>() { new QuestEffect(6, false, true), new ChangeStartingDialogueEffect("ATM", 23) }, "Mom", "More? Okay, I'll send you some. Try not to spend it so fast though!", null, "Okay, I will, thanks.", null) },
+        { 20, new Dialogue(20, "mom", new List<DialogueEffect>(), "Mom", "Hey pumpkin, I'm a bit busy. What's up?", "Hey, could you send some money?", null, "Nevermind, let's talk later.") },
+        { 21, new Dialogue(21, "mom", new List<DialogueEffect>() { new QuestEffect(6, false, true), new ChangeStartingDialogueEffect("ATM", 23), new ChangeEffect(4) }, "Mom", "More? Okay, I'll send you some. Try not to spend it so fast though!", null, "Okay, I will, thanks.", null) },
 
-        { 22, new Dialogue(22, new List<DialogueEffect>(), "ATM", "The ATM declines your card. Your account must be empty.", null, "Well then...", null) },
-        { 23, new Dialogue(23, new List<DialogueEffect>(), "ATM", "Here's the train station ATM. It's as filty as you would expect it to be.", "Get Money", null, "Leave") },
-        { 24, new Dialogue(24, new List<DialogueEffect>() { new QuestEffect(7, false, true), new MoneyEffect(30), new ChangeEffect(22) }, "ATM", "The ATM dispensed 30 bucks. Apparently that's all you have left on your card. You might wanna wipe your fingers.", null, "Yuck.", null) },
+        { 22, new Dialogue(22, null, new List<DialogueEffect>(), "ATM", "The ATM declines your card. Your account must be empty.", null, "Well then...", null) },
+        { 23, new Dialogue(23, null, new List<DialogueEffect>(), "ATM", "Here's the train station ATM. It's as filty as you would expect it to be.", "Get Money", null, "Leave") },
+        { 24, new Dialogue(24, null, new List<DialogueEffect>() { new QuestEffect(7, false, true), new MoneyEffect(30), new ChangeEffect(22) }, "ATM", "The ATM dispensed 30 bucks. Apparently that's all you have left on your card. You might wanna wipe your fingers.", null, "Yuck.", null) },
 
-        { 25, new Dialogue(25, new List<DialogueEffect>(), "ATM", "There's a piece of paper taped on this. It says 'Out of Order'", null, "Nothing to do here", null) },
-        { 26, new Dialogue(26, new List<DialogueEffect>(), "ATM", "You're missing your wallet. No credit card, no money.", null, "Ah, crap", null) },
+        { 25, new Dialogue(25, null, new List<DialogueEffect>(), "ATM", "There's a piece of paper taped on this. It says 'Out of Order'", null, "Nothing to do here", null) },
+        { 26, new Dialogue(26, null, new List<DialogueEffect>(), "ATM", "You're missing your wallet. No credit card, no money.", null, "Ah, crap", null) },
 
-        { 27, new Dialogue(27, new List<DialogueEffect>(), "Xerox", "A xerox. Guess you know where to come if you need to copy some papers...", null, "Good to know...", null) },
-        { 28, new Dialogue(28, new List<DialogueEffect>(), "Xerox", "A xerox. Perfect place to copy those papers.", "Copy them", null, "Not yet") },
-        { 29, new Dialogue(29, new List<DialogueEffect>() { new QuestEffect(8, false, true), new ItemEffect(6, -1), new ItemEffect(7, 1), new ChangeEffect(27) }, "Xerox", "You now have even more papers. Hooray...?", null, "Guess so.", null) },
+        { 27, new Dialogue(27, null, new List<DialogueEffect>(), "Xerox", "A xerox. Guess you know where to come if you need to copy some papers...", null, "Good to know...", null) },
+        { 28, new Dialogue(28, null, new List<DialogueEffect>(), "Xerox", "A xerox. Perfect place to copy those papers.", "Copy them", null, "Not yet") },
+        { 29, new Dialogue(29, null, new List<DialogueEffect>() { new QuestEffect(8, false, true), new ItemEffect(6, -1), new ItemEffect(7, 1), new ChangeEffect(27) }, "Xerox", "You now have even more papers. Hooray...?", null, "Guess so.", null) },
 
-        { 30, new Dialogue(30, new List<DialogueEffect>(), "Diana", "Oh, hey, you look not busy, unlike me. I got these papers I need copying. Go do it for me.", "Why would I do that?", null, "*Back away slowly*") },
-        { 31, new Dialogue(31, new List<DialogueEffect>(), "Diana", "I can pay you to do it. I don't care, just go do it.", "Alright, sounds good.", null, "Lemme think about it") },
-        { 32, new Dialogue(32, new List<DialogueEffect>() { new QuestEffect(8, true, false), new ChangeStartingDialogueEffect("Xerox", 28), new ItemEffect(6, 1), new ChangeEffect(33) }, "Diana", "Good. Now get to it. Those are important. Don't smudge them or I kill you.", null, "Okay...?", null) },
-        { 33, new Dialogue(33, new List<DialogueEffect>(), "Diana", "Have you got those papers?", "Yes", null, "Not yet") },
-        { 34, new Dialogue(34, new List<DialogueEffect>(), "Diana", "Then what are you doing here? Go away and do it.", null, "Okay, okay", null) },
-        { 35, new Dialogue(35, new List<DialogueEffect>() { new QuestEffect(9, false, true), new ItemEffect(7, -1), new ChangeEffect(36), new MoneyEffect(20) }, "Diana", "Great. Here's 20 bucks for the effort. Now leave me alone please!", null, "Glad to help I guess", null) },
-        { 36, new Dialogue(36, new List<DialogueEffect>(), "Diana", "I don't need you anymore. Go away.", null, "Damn, okay", null) },
+        { 30, new Dialogue(30, "diana", new List<DialogueEffect>(), "Diana", "Oh, hey, you look not busy, unlike me. I got these papers I need copying. Go do it for me.", "Why would I do that?", null, "*Back away slowly*") },
+        { 31, new Dialogue(31, "diana", new List<DialogueEffect>(), "Diana", "I can pay you to do it. I don't care, just go do it.", "Alright, sounds good.", null, "Lemme think about it") },
+        { 32, new Dialogue(32, "diana", new List<DialogueEffect>() { new QuestEffect(8, true, false), new ChangeStartingDialogueEffect("Xerox", 28), new ItemEffect(6, 1), new ChangeEffect(33) }, "Diana", "Good. Now get to it. Those are important. Don't smudge them or I kill you.", null, "Okay...?", null) },
+        { 33, new Dialogue(33, "diana", new List<DialogueEffect>(), "Diana", "Have you got those papers?", "Yes", null, "Not yet") },
+        { 34, new Dialogue(34, "diana", new List<DialogueEffect>(), "Diana", "Then what are you doing here? Go away and do it.", null, "Okay, okay", null) },
+        { 35, new Dialogue(35, "diana", new List<DialogueEffect>() { new QuestEffect(9, false, true), new ItemEffect(7, -1), new ChangeEffect(36), new MoneyEffect(20), new QuestObjectEffect("Diana", false) }, "Diana", "Great. Here's 20 bucks for the effort. Now leave me alone please!", null, "Glad to help I guess", null) },
+        { 36, new Dialogue(36, "diana", new List<DialogueEffect>(), "Diana", "I don't need you anymore. Go away.", null, "Damn, okay", null) },
 
-        { 37, new Dialogue(37, new List<DialogueEffect>(), "Sewer Hobo", "Hey, you. You got something I could eat? I can give you something in return.", "Is that something money?", null, "What the hell, no") },
-        { 38, new Dialogue(38, new List<DialogueEffect>(), "Sewer Hobo", "Well, something like that. So, you in?", "Yeah, I guess", null, "Yeah... No thanks") },
-        { 39, new Dialogue(39, new List<DialogueEffect>() { new ChangeEffect(39), new QuestEffect(10, true, false) }, "Sewer Hobo", "So, you got anything to eat then?", "Yeah... Here", null, "Not yet, sorry") },
-        { 40, new Dialogue(40, new List<DialogueEffect>() { new ChangeEffect(41), new QuestEffect(11, false, true), new ItemEffect(8, 1), new ItemEffect(9, -1) }, "Sewer Hobo", "Yeah, thanks man. Here, take this package. Just... becareful with it...", null, "Okay...", null) },
-        { 41, new Dialogue(41, new List<DialogueEffect>(), "Sewer Hobo", "Let a man enjoy his burger, will ya?", null, "Umm, okay?", null) },
+        { 37, new Dialogue(37, "sewer", new List<DialogueEffect>(), "Sewer Hobo", "Hey, you. You got something I could eat? I can give you something in return.", "Is that something money?", null, "What the hell, no") },
+        { 38, new Dialogue(38, "sewer", new List<DialogueEffect>(), "Sewer Hobo", "Well, something like that. So, you in?", "Yeah, I guess", null, "Yeah... No thanks") },
+        { 39, new Dialogue(39, "sewer", new List<DialogueEffect>() { new ChangeEffect(39), new QuestEffect(10, true, false) }, "Sewer Hobo", "So, you got anything to eat then?", "Yeah... Here", null, "Not yet, sorry") },
+        { 40, new Dialogue(40, "sewer", new List<DialogueEffect>() { new ChangeEffect(41), new QuestEffect(11, false, true), new ItemEffect(8, 1), new ItemEffect(9, -1), new QuestObjectEffect("Manhole", false) }, "Sewer Hobo", "Yeah, thanks man. Here, take this package. Just... becareful with it...", null, "Okay...", null) },
+        { 41, new Dialogue(41, "sewer", new List<DialogueEffect>(), "Sewer Hobo", "Let a man enjoy his burger, will ya?", null, "Umm, okay?", null) },
 
-        { 42, new Dialogue(42, new List<DialogueEffect>(), "Trashcan", "There's a lot of random trash in here, but there's also an old discarded burger. Maybe it could be useful?", "Take it", null, "No thanks") },
-        { 43, new Dialogue(43, new List<DialogueEffect>() { new DestroyEffect(), new QuestEffect(10, false, true), new ItemEffect(9, 1) }, "Trashcan", "You are now the proud holder of an old moldy trash burger!", null, "Great...?", null) },
+        { 42, new Dialogue(42, null, new List<DialogueEffect>(), "Trashcan", "There's a lot of random trash in here, but there's also an old discarded burger. Maybe it could be useful?", "Take it", null, "No thanks") },
+        { 43, new Dialogue(43, null, new List<DialogueEffect>() { new DestroyEffect(), new QuestEffect(10, false, true), new ItemEffect(9, 1) }, "Trashcan", "You are now the proud holder of an old moldy trash burger!", null, "Great...?", null) },
 
-        { 44, new Dialogue(44, new List<DialogueEffect>() { new QuestEffect(12, true, false) }, "Weird Guy", "Hey, you know, there are some packages I... lost... through the station. If you find one, mind bringing it to me?", "I got one here", null, "Okay, I guess") },
-        { 45, new Dialogue(45, new List<DialogueEffect>() { new QuestEffect(13, false, true), new ChangeEffect(46), new ItemEffect(8, -1), new MoneyEffect(20) }, "Weird Guy", "Thanks man. Here's a 20. Don't spend it all in one place! I'm serious. Don't.", null, "Right...", null) },
-        { 46, new Dialogue(46, new List<DialogueEffect>(), "Weird Guy", "Go away. We shouldn't be seen together for a while.", null, "Oh boy...", null) },
+        { 44, new Dialogue(44, "homeless1", new List<DialogueEffect>() { new QuestEffect(12, true, false) }, "Weird Guy", "Hey, you know, there are some packages I... lost... through the station. If you find one, mind bringing it to me?", "I got one here", null, "Okay, I guess") },
+        { 45, new Dialogue(45, "homeless1", new List<DialogueEffect>() { new QuestEffect(13, false, true), new ChangeEffect(46), new ItemEffect(8, -1), new MoneyEffect(20), new QuestObjectEffect("WeirdGuy", false) }, "Weird Guy", "Thanks man. Here's a 20. Don't spend it all in one place! I'm serious. Don't.", null, "Right...", null) },
+        { 46, new Dialogue(46, "homeless1", new List<DialogueEffect>(), "Weird Guy", "Go away. We shouldn't be seen together for a while.", null, "Oh boy...", null) },
 
-        { 100, new Dialogue(100, new List<DialogueEffect>(), "Taxi Guy", "You trying to go somewhere, kid?", null, "Not right now", null) },
-        { 101, new Dialogue(101, new List<DialogueEffect>(), "Taxi Guy", "Then go away and stop wasting my time.", null, "Jeez, okay...", null) },
+        { 100, new Dialogue(100, "taximetrist", new List<DialogueEffect>(), "Taxi Guy", "You trying to go somewhere, kid?", null, "Not right now", null) },
+        { 101, new Dialogue(101, "taximetrist", new List<DialogueEffect>(), "Taxi Guy", "Then go away and stop wasting my time.", null, "Jeez, okay...", null) },
 
-        //{ 1, new Dialogue(1, new List<DialogueEffect>() { new QuestEffect(1, true, false) }, "Hobo", "Hey, you got anything to eat?", "Sure", null, "Sorry, I don't" ) },
-        //{ 2, new Dialogue(2, new List<DialogueEffect>() { new QuestEffect(2, false, true), new ItemEffect(1, -1), new ChangeEffect(5) }, "Hobo", "Thanks mate", null, "No Problem", null) },
-        //{ 3, new Dialogue(3, new List<DialogueEffect>(), "Trash", "There is a WcDonalds hamburger thrown in the trash. Take it?", "Yes", null, "No") },
-        //{ 4, new Dialogue(4, new List<DialogueEffect>() { new QuestEffect(1,false, true), new ItemEffect(1, 1), new DestroyEffect() }, "Trash", "You got a WcDonalds hamburger!", null, "Great!", null) },
-
-        //{ 5, new Dialogue(5, new List<DialogueEffect>(), "Hobo", "I owe you one!", null, "Sure thing", null) }
+        { 102, new Dialogue(102, "taximetrist2", new List<DialogueEffect>(), "Taxi Guy", "You trying to go somewhere, kid?", null, "Not right now", null) },
+        { 103, new Dialogue(103, "taximetrist2", new List<DialogueEffect>(), "Taxi Guy", "Then go away and stop wasting my time.", null, "Jeez, okay...", null) }
     };
 
     public static Dictionary<int, TreeNode> treeDatabase = new Dictionary<int, TreeNode>()
@@ -417,12 +436,8 @@ public class Database : ScriptableObject
         { 100, new TreeNode(dialogueDatabase[100], -1, 101, -1) },
         { 101, new TreeNode(dialogueDatabase[101], -1, -1, -1) },
 
-        //{ 1, new TreeNode( dialogueDatabase[1], 2, -1, -1) },
-        //{ 2, new TreeNode( dialogueDatabase[2], -1, -1, -1) },
-        //{ 3, new TreeNode( dialogueDatabase[3], 4, -1, -1) },
-        //{ 4, new TreeNode( dialogueDatabase[4], -1, -1, -1) },
-
-        //{ 5, new TreeNode( dialogueDatabase[5], -1, -1, -1) }
+        { 102, new TreeNode(dialogueDatabase[102], -1, 103, -1) },
+        { 103, new TreeNode(dialogueDatabase[103], -1, -1, -1) }
     };
 
     public static List<Questline> questlineDatabase = new List<Questline>()
