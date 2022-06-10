@@ -33,6 +33,7 @@ public class DialogueOption : MonoBehaviour
 
     private void Update()
     {
+        GetComponent<Button>().interactable = true;
         if (changesItem)
         {
             if (itemQuantity < 0)
@@ -45,10 +46,9 @@ public class DialogueOption : MonoBehaviour
                     }
                 }
                 GetComponent<Button>().interactable = false;
-                return;
             }
         }
-
+        
         if (changesMoney)
         {
             if (quantity < 0)
@@ -60,7 +60,6 @@ public class DialogueOption : MonoBehaviour
                 }
             }
         }
-        GetComponent<Button>().interactable = true;
     }
 
     public void Selected()

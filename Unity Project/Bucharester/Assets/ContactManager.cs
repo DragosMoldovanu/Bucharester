@@ -7,7 +7,7 @@ public class ContactManager : MonoBehaviour
     public GameObject contactsContainer;
     public GameObject contactPrefab;
 
-    void Start()
+    void OnEnable()
     {
         foreach (Transform contact in contactsContainer.transform)
         {

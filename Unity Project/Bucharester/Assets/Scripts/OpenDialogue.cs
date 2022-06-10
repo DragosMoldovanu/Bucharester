@@ -94,13 +94,33 @@ public class OpenDialogue : MonoBehaviour
                 GameObject.Find("Stats").GetComponent<StatsManager>().EnableMoney();
                 Database.moneyUnlocked = true;
             }
+            else if (effect is Database.ChangeStartingDialogueEffect)
+            {
+                string obj = (effect as Database.ChangeStartingDialogueEffect).obj;
+                int dlg = (effect as Database.ChangeStartingDialogueEffect).newDialogue;
+                if (GameObject.Find(obj) != null)
+                {
+                    GameObject.Find(obj).GetComponent<OpenDialogue>().startDialogue = dlg;
+                    GameObject.Find(obj).GetComponent<OpenDialogue>().dialogueId = dlg;
+                }
+            }
+            else if (effect is Database.ChangePhoneEffect)
+            {
+                string obj = (effect as Database.ChangePhoneEffect).contact;
+                int dlg = (effect as Database.ChangePhoneEffect).newDialogue;
+                Database.contactsDatabase[obj] = dlg;
+            }
         }
 
         if (dialogue.option1 != null)
         {
             optionButton1.SetActive(true);
             optionButton1.transform.Find("Text").GetComponent<Text>().text = dialogue.option1;
-            if (node.option1 > 0) {
+            if (node.option1 > 0) 
+            {
+                optionButton1.GetComponent<DialogueOption>().affectsQuest = false;
+                optionButton1.GetComponent<DialogueOption>().changesItem = false;
+                optionButton1.GetComponent<DialogueOption>().changesMoney = false;
                 foreach (Database.DialogueEffect effect in Database.dialogueDatabase[node.option1].effects)
                 {
                     if (effect is Database.QuestEffect)
@@ -108,23 +128,6 @@ public class OpenDialogue : MonoBehaviour
                         optionButton1.GetComponent<DialogueOption>().affectsQuest = true;
                         optionButton1.GetComponent<DialogueOption>().interactName = name;
                         optionButton1.GetComponent<DialogueOption>().questId = (effect as Database.QuestEffect).questId;
-
-                        if ((effect as Database.QuestEffect).accept == true)
-                        {
-                            int questId = (effect as Database.QuestEffect).questId;
-                            QuestManager questManager = GameObject.Find("QuestList").GetComponent<QuestManager>();
-                            foreach (Database.Questline questline in Database.questlineDatabase)
-                            {
-                                for (int i = 0; i < questline.questCount - 1; i++)
-                                {
-                                    Debug.Log(questline.questIds[i] + " " + questline.questIds[i + 1]);
-                                    if (questline.questIds[i + 1] == questId && !questManager.completedQuests.Contains(questline.questIds[i]))
-                                    {
-                                        optionButton1.SetActive(false);
-                                    }
-                                }
-                            }
-                        }
                     }
 
                     if (effect is Database.ItemEffect)
@@ -164,6 +167,9 @@ public class OpenDialogue : MonoBehaviour
             optionButton2.transform.Find("Text").GetComponent<Text>().text = dialogue.option2;
             if (node.option2 > 0)
             {
+                optionButton2.GetComponent<DialogueOption>().affectsQuest = false;
+                optionButton2.GetComponent<DialogueOption>().changesItem = false;
+                optionButton2.GetComponent<DialogueOption>().changesMoney = false;
                 foreach (Database.DialogueEffect effect in Database.dialogueDatabase[node.option2].effects)
                 {
                     if (effect is Database.QuestEffect)
@@ -171,22 +177,6 @@ public class OpenDialogue : MonoBehaviour
                         optionButton2.GetComponent<DialogueOption>().affectsQuest = true;
                         optionButton2.GetComponent<DialogueOption>().interactName = name;
                         optionButton2.GetComponent<DialogueOption>().questId = (effect as Database.QuestEffect).questId;
-
-                        if ((effect as Database.QuestEffect).accept == true)
-                        {
-                            int questId = (effect as Database.QuestEffect).questId;
-                            QuestManager questManager = GameObject.Find("QuestList").GetComponent<QuestManager>();
-                            foreach (Database.Questline questline in Database.questlineDatabase)
-                            {
-                                for (int i = 0; i < questline.questCount - 1; i++)
-                                {
-                                    if (questline.questIds[i + 1] == questId && !questManager.completedQuests.Contains(questline.questIds[i]))
-                                    {
-                                        optionButton2.SetActive(false);
-                                    }
-                                }
-                            }
-                        }
                     }
 
                     if (effect is Database.ItemEffect)
@@ -226,6 +216,9 @@ public class OpenDialogue : MonoBehaviour
             optionButton3.transform.Find("Text").GetComponent<Text>().text = dialogue.option3;
             if (node.option3 > 0)
             {
+                optionButton3.GetComponent<DialogueOption>().affectsQuest = false;
+                optionButton3.GetComponent<DialogueOption>().changesItem = false;
+                optionButton3.GetComponent<DialogueOption>().changesMoney = false;
                 foreach (Database.DialogueEffect effect in Database.dialogueDatabase[node.option3].effects)
                 {
                     if (effect is Database.QuestEffect)
@@ -233,22 +226,6 @@ public class OpenDialogue : MonoBehaviour
                         optionButton3.GetComponent<DialogueOption>().affectsQuest = true;
                         optionButton3.GetComponent<DialogueOption>().interactName = name;
                         optionButton3.GetComponent<DialogueOption>().questId = (effect as Database.QuestEffect).questId;
-
-                        if ((effect as Database.QuestEffect).accept == true)
-                        {
-                            int questId = (effect as Database.QuestEffect).questId;
-                            QuestManager questManager = GameObject.Find("QuestList").GetComponent<QuestManager>();
-                            foreach (Database.Questline questline in Database.questlineDatabase)
-                            {
-                                for (int i = 0; i < questline.questCount - 1; i++)
-                                {
-                                    if (questline.questIds[i + 1] == questId && !questManager.completedQuests.Contains(questline.questIds[i]))
-                                    {
-                                        optionButton3.SetActive(false);
-                                    }
-                                }
-                            }
-                        }
                     }
 
                     if (effect is Database.ItemEffect)

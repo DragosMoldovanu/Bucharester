@@ -80,7 +80,10 @@ public class QuestManager : MonoBehaviour
         if (activeQuests.Contains(id))
         {
             DeleteActiveQuest(id);
-            completedQuests.Add(id);
+            if (!completedQuests.Contains(id))
+            {
+                completedQuests.Add(id);
+            }
             NextQuest(id);
         }
     }
