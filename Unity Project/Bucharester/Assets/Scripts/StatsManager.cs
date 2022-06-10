@@ -18,7 +18,7 @@ public class StatsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        money.text = moneyAmount.ToString();
+        money.text = moneyAmount.ToString() + " RON";
         hunger.value = hungerPercent;
     }
 
@@ -45,6 +45,11 @@ public class StatsManager : MonoBehaviour
     public void UpdateHunger(float amount)
     {
         hungerPercent += amount;
+        if (hungerPercent < 0)
+            hungerPercent = 0;
+        if (hungerPercent > 100)
+            hungerPercent = 100;
+
         hunger.value = hungerPercent;
     }
 }

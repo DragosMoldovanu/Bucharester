@@ -41,7 +41,7 @@ public class InventoryItemController : MonoBehaviour
 
     public void UseItem()
     {
-        GameObject.Find("Stats").GetComponent<StatsManager>().UpdateHunger(15);
+        GameObject.Find("Stats").GetComponent<StatsManager>().UpdateHunger(Database.itemDatabase[id].feedAmount);
         transform.parent.parent.parent.GetComponent<InventoryManager>().RemoveItem(id);
     }
 }

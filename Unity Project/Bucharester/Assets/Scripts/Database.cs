@@ -14,13 +14,15 @@ public class Database : ScriptableObject
         public string name;
         public string description;
         public bool usable;
+        public float feedAmount;
 
-        public ItemData(string _sprite, string _name, string _description, bool _usable)
+        public ItemData(string _sprite, string _name, string _description, bool _usable, float _feedAmount = 0)
         {
             sprite = _sprite;
             name = _name;
             description = _description;
             usable = _usable;
+            feedAmount = _feedAmount;
         }
     }
 
@@ -272,11 +274,11 @@ public class Database : ScriptableObject
 
     public static Dictionary<int, ItemData> itemDatabase = new Dictionary<int, ItemData>()
     {
-        { 1, new ItemData("burger", "Burger", "This tiny burger can also travel through thick walls.", true) },
-        { 2, new ItemData("burger", "Soda", "This was definitely not made in China.", true) },
-        { 3, new ItemData("soda", "Soda", "Refreshing sugary beverage, timed bomb, who knows what else.", true) },
-        { 4, new ItemData("burger", "Cold Sandwitch", "May not be tasty, but at lesat it does its job, who needs laxatives anymore?", true) },
-        { 5, new ItemData("burger", "Chocolate Bar", "Once a slice of heaven, now a reminder of hell.", true) },
+        { 1, new ItemData("burger", "Burger", "This tiny burger can also travel through thick walls.", true, 25) },
+        { 2, new ItemData("burger", "Chips", "This was definitely not made in China.", true, 20) },
+        { 3, new ItemData("soda", "Soda", "Refreshing sugary beverage, timed bomb, who knows what else.", true, 10) },
+        { 4, new ItemData("burger", "Cold Sandwitch", "May not be tasty, but at least it does its job, who needs laxatives anymore?", true, 40) },
+        { 5, new ItemData("burger", "Chocolate Bar", "Once a slice of heaven, now a reminder of hell.", true, 20) },
 
         { 6, new ItemData("soda", "Files", "A tree named Greet might have been hurt in the process", false) },
         { 7, new ItemData("soda", "More Files", "What's better than papers? More papers!", false) },
@@ -370,7 +372,19 @@ public class Database : ScriptableObject
         { 101, new Dialogue(101, "taximetrist", new List<DialogueEffect>(), "Taxi Guy", "Then go away and stop wasting my time.", null, "Jeez, okay...", null) },
 
         { 102, new Dialogue(102, "taximetrist2", new List<DialogueEffect>(), "Taxi Guy", "You trying to go somewhere, kid?", null, "Not right now", null) },
-        { 103, new Dialogue(103, "taximetrist2", new List<DialogueEffect>(), "Taxi Guy", "Then go away and stop wasting my time.", null, "Jeez, okay...", null) }
+        { 103, new Dialogue(103, "taximetrist2", new List<DialogueEffect>(), "Taxi Guy", "Then go away and stop wasting my time.", null, "Jeez, okay...", null) },
+
+        { 1000, new Dialogue(1000, null, new List<DialogueEffect>(), "WcDonalds", "Hello this is WcDonalnds, can I take your order?", "Burger (2 RON)", "Soda (1 RON)", "Not right now") },
+        { 1001, new Dialogue(1001, null, new List<DialogueEffect>() { new MoneyEffect(-2), new ItemEffect(1, 1) }, "WcDonalds", "Alright, here's your burger. Have a good day!", null, "Thanks", null) },
+        { 1002, new Dialogue(1002, null, new List<DialogueEffect>() { new MoneyEffect(-1), new ItemEffect(3, 1) }, "WcDonalds", "Alright, here's your drink. Have a good day!", null, "Thanks", null) },
+
+        { 1003, new Dialogue(1003, null, new List<DialogueEffect>(), "Vending Machine", "From what you can see, you can either get a soda or some chips", "Chips (1 RON)", "Soda (1 RON)", "Nevermind") },
+        { 1004, new Dialogue(1004, null, new List<DialogueEffect>() { new MoneyEffect(-1), new ItemEffect(2, 1) }, "Vending Machine", "You got a bag of chips.", null, "Good", null) },
+        { 1005, new Dialogue(1005, null, new List<DialogueEffect>() { new MoneyEffect(-1), new ItemEffect(3, 1) }, "Vending Machine", "You got a soda can.", null, "Good", null) },
+
+        { 1006, new Dialogue(1006, null, new List<DialogueEffect>(), "Vending Machine", "From what you can see, you can either get a sandwitch or some chocolate", "Sandwitch (3 RON)", "Chocolate (2 RON)", "Nevermind") },
+        { 1007, new Dialogue(1007, null, new List<DialogueEffect>() { new MoneyEffect(-3), new ItemEffect(4, 1) }, "Vending Machine", "You got a wrapped, cold ham sandwitch", null, "Alright", null) },
+        { 1008, new Dialogue(1008, null, new List<DialogueEffect>() { new MoneyEffect(-2), new ItemEffect(5, 1) }, "Vending Machine", "You got a bar of chocolate", null, "Alright", null) }
     };
 
     public static Dictionary<int, TreeNode> treeDatabase = new Dictionary<int, TreeNode>()
@@ -437,7 +451,19 @@ public class Database : ScriptableObject
         { 101, new TreeNode(dialogueDatabase[101], -1, -1, -1) },
 
         { 102, new TreeNode(dialogueDatabase[102], -1, 103, -1) },
-        { 103, new TreeNode(dialogueDatabase[103], -1, -1, -1) }
+        { 103, new TreeNode(dialogueDatabase[103], -1, -1, -1) },
+
+        { 1000, new TreeNode(dialogueDatabase[1000], 1001, 1002, -1) },
+        { 1001, new TreeNode(dialogueDatabase[1001], -1, -1, -1) },
+        { 1002, new TreeNode(dialogueDatabase[1002], -1, -1, -1) },
+
+        { 1003, new TreeNode(dialogueDatabase[1003], 1004, 1005, -1) },
+        { 1004, new TreeNode(dialogueDatabase[1004], -1, -1, -1) },
+        { 1005, new TreeNode(dialogueDatabase[1005], -1, -1, -1) },
+
+        { 1006, new TreeNode(dialogueDatabase[1006], 1007, 1008, -1) },
+        { 1007, new TreeNode(dialogueDatabase[1007], -1, -1, -1) },
+        { 1008, new TreeNode(dialogueDatabase[1008], -1, -1, -1) }
     };
 
     public static List<Questline> questlineDatabase = new List<Questline>()

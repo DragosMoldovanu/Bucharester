@@ -151,6 +151,14 @@ public class OpenDialogue : MonoBehaviour
             {
                 NPC.enabled = true;
                 NPC.sprite = npcSprite;
+                if (dialogue.sprite == "mom")
+                {
+                    NPC.transform.localEulerAngles = new Vector3(0, 0, 0);
+                }
+                else
+                {
+                    NPC.transform.localEulerAngles = new Vector3(0, 180, 0);
+                }
             }
             else
             {
@@ -204,6 +212,10 @@ public class OpenDialogue : MonoBehaviour
             {
                 optionButton1.GetComponent<DialogueOption>().closesDialogue = true;
                 optionButton1.GetComponent<DialogueOption>().continuesDialogue = false;
+
+                optionButton1.GetComponent<DialogueOption>().affectsQuest = false;
+                optionButton1.GetComponent<DialogueOption>().changesItem = false;
+                optionButton1.GetComponent<DialogueOption>().changesMoney = false;
             }
         }
         else
@@ -253,6 +265,10 @@ public class OpenDialogue : MonoBehaviour
             {
                 optionButton2.GetComponent<DialogueOption>().closesDialogue = true;
                 optionButton2.GetComponent<DialogueOption>().continuesDialogue = false;
+
+                optionButton2.GetComponent<DialogueOption>().affectsQuest = false;
+                optionButton2.GetComponent<DialogueOption>().changesItem = false;
+                optionButton2.GetComponent<DialogueOption>().changesMoney = false;
             }
         }
         else
@@ -302,6 +318,10 @@ public class OpenDialogue : MonoBehaviour
             {
                 optionButton3.GetComponent<DialogueOption>().closesDialogue = true;
                 optionButton3.GetComponent<DialogueOption>().continuesDialogue = false;
+
+                optionButton3.GetComponent<DialogueOption>().affectsQuest = false;
+                optionButton3.GetComponent<DialogueOption>().changesItem = false;
+                optionButton3.GetComponent<DialogueOption>().changesMoney = false;
             }
         }
         else
