@@ -42,7 +42,10 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (items.Count > 0 && inventoryTab.activeSelf)
+        {
+            GameObject.Find("Tutorial Popups").GetComponent<TutorialManager>().ItemPopup();
+        }
     }
 
     void OnEnable()

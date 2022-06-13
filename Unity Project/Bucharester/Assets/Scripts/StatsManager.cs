@@ -29,6 +29,15 @@ public class StatsManager : MonoBehaviour
         {
             UpdateHunger(-hungerPerSecond * Time.deltaTime);
         }
+
+        if (hungerPercent < 20)
+        {
+            GameObject.Find("Tutorial Popups").GetComponent<TutorialManager>().HungerPopup();
+        }
+        else
+        {
+            GameObject.Find("Tutorial Popups").GetComponent<TutorialManager>().HungerFine();
+        }
     }
 
     public void EnableMoney()

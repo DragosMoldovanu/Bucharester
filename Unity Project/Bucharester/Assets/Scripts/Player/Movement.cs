@@ -13,6 +13,8 @@ public class Movement : MonoBehaviour
 
     public Animator squashStretchAnimator;
 
+    public GameObject sprite;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,10 +39,12 @@ public class Movement : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 direction -= transform.right;
+                sprite.transform.localEulerAngles = new Vector3(0, 0, 0);
             }
             if (Input.GetKey(KeyCode.D))
             {
                 direction += transform.right;
+                sprite.transform.localEulerAngles = new Vector3(0, 180, 0);
             }
             if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
             {

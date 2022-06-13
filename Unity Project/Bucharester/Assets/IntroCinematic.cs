@@ -18,6 +18,8 @@ public class IntroCinematic : MonoBehaviour
     public GameObject questList;
     public GameObject stats;
     public GameObject phone;
+    public GameObject pauseMenu;
+    public GameObject tutorials;
 
     public GameObject backpack;
     public GameObject wallet;
@@ -89,6 +91,8 @@ public class IntroCinematic : MonoBehaviour
             questList.SetActive(true);
             phone.SetActive(true);
             stats.SetActive(true);
+            pauseMenu.SetActive(true);
+            tutorials.SetActive(true);
 
             thief1.SetActive(false);
             thief2.SetActive(false);

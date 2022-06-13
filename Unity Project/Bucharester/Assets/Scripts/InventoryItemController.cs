@@ -37,11 +37,13 @@ public class InventoryItemController : MonoBehaviour
     public void ClickItem()
     {
         popup.SetActive(!popup.activeSelf);
+        GameObject.Find("Tutorial Popups").GetComponent<TutorialManager>().ItemClicked();
     }
 
     public void UseItem()
     {
         GameObject.Find("Stats").GetComponent<StatsManager>().UpdateHunger(Database.itemDatabase[id].feedAmount);
         transform.parent.parent.parent.GetComponent<InventoryManager>().RemoveItem(id);
+        GameObject.Find("Tutorial Popups").GetComponent<TutorialManager>().EatingPopup();
     }
 }
