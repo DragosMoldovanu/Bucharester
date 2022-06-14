@@ -142,6 +142,13 @@ public class OpenDialogue : MonoBehaviour
                     Database.questedObjects.Add(obj);
                 }
             }
+            else if (effect is Database.SoundEffect)
+            {
+                AudioClip sound = Resources.Load<AudioClip>("Audio/" + (effect as Database.SoundEffect).sound);
+                Debug.Log(sound);
+                box.GetComponent<AudioSource>().clip = sound;
+                box.GetComponent<AudioSource>().Play();
+            }
         }
 
         if (dialogue.sprite != null)

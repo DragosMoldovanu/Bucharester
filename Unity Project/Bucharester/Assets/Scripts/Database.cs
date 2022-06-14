@@ -128,6 +128,16 @@ public class Database : ScriptableObject
         }
     }
 
+    public class SoundEffect : DialogueEffect
+    {
+        public string sound;
+
+        public SoundEffect(string sound)
+        {
+            this.sound = sound;
+        }
+    }
+
     public class Dialogue
     {
         public int id;
@@ -276,7 +286,7 @@ public class Database : ScriptableObject
     {
         { 1, new ItemData("burger", "Burger", "This tiny burger can also travel through thick walls.", true, 25) },
         { 2, new ItemData("burger", "Chips", "For when you want to destroy your liver and don't have access to tabacco or booze.", true, 20) },
-        { 3, new ItemData("soda", "Soda", "Makes your heart skip a bit...or two. You should go see a doctor about that.", true, 10) },
+        { 3, new ItemData("soda", "Soda", "Makes your heart skip a beat...or two. You should go see a doctor about that.", true, 10) },
         { 4, new ItemData("burger", "Cold Sandwitch", "Probably cheaper than a box of laxatives and just as effective.", true, 40) },
         { 5, new ItemData("burger", "Chocolate Bar", "No chocolate in this chocolate bar, but it's sweet so who cares.", true, 20) },
 
@@ -336,16 +346,16 @@ public class Database : ScriptableObject
         { 20, new Dialogue(20, "mom", new List<DialogueEffect>(), "Mom", "Hey pumpkin, I'm a bit busy. What's up?", "Hey, could you send some money?", null, "Nevermind, let's talk later.") },
         { 21, new Dialogue(21, "mom", new List<DialogueEffect>() { new QuestEffect(6, false, true), new ChangeStartingDialogueEffect("ATM", 23), new ChangeEffect(4) }, "Mom", "More? Okay, I'll send you some. Try not to spend it so fast though!", null, "Okay, I will, thanks.", null) },
 
-        { 22, new Dialogue(22, null, new List<DialogueEffect>(), "ATM", "The ATM declines your card. Your account must be empty.", null, "Well then...", null) },
-        { 23, new Dialogue(23, null, new List<DialogueEffect>(), "ATM", "Here's the train station ATM. It's as filty as you would expect it to be.", "Get Money", null, "Leave") },
-        { 24, new Dialogue(24, null, new List<DialogueEffect>() { new QuestEffect(7, false, true), new MoneyEffect(30), new ChangeEffect(22) }, "ATM", "The ATM dispensed 30 bucks. Apparently that's all you have left on your card. You might wanna wipe your fingers.", null, "Yuck.", null) },
+        { 22, new Dialogue(22, null, new List<DialogueEffect>() { new SoundEffect("Train Station Sounds/Train Station Interactables/ATM Open") }, "ATM", "The ATM declines your card. Your account must be empty.", null, "Well then...", null) },
+        { 23, new Dialogue(23, null, new List<DialogueEffect>() { new SoundEffect("Train Station Sounds/Train Station Interactables/ATM Open") }, "ATM", "Here's the train station ATM. It's as filty as you would expect it to be.", "Get Money", null, "Leave") },
+        { 24, new Dialogue(24, null, new List<DialogueEffect>() { new QuestEffect(7, false, true), new MoneyEffect(30), new ChangeEffect(22), new SoundEffect("Train Station Sounds/Train Station Interactables/ATM Extract") }, "ATM", "The ATM dispensed 30 bucks. Apparently that's all you have left on your card. You might wanna wipe your fingers.", null, "Yuck.", null) },
 
         { 25, new Dialogue(25, null, new List<DialogueEffect>(), "ATM", "There's a piece of paper taped on this. It says 'Out of Order'", null, "Nothing to do here", null) },
-        { 26, new Dialogue(26, null, new List<DialogueEffect>(), "ATM", "You're missing your wallet. No credit card, no money.", null, "Ah, crap", null) },
+        { 26, new Dialogue(26, null, new List<DialogueEffect>() { new SoundEffect("Train Station Sounds/Train Station Interactables/ATM Open") }, "ATM", "You're missing your wallet. No credit card, no money.", null, "Ah, crap", null) },
 
         { 27, new Dialogue(27, null, new List<DialogueEffect>(), "Xerox", "A xerox. Guess you know where to come if you need to copy some papers...", null, "Good to know...", null) },
         { 28, new Dialogue(28, null, new List<DialogueEffect>(), "Xerox", "A xerox. Perfect place to copy those papers.", "Copy them", null, "Not yet") },
-        { 29, new Dialogue(29, null, new List<DialogueEffect>() { new QuestEffect(8, false, true), new ItemEffect(6, -1), new ItemEffect(7, 1), new ChangeEffect(27) }, "Xerox", "You now have even more papers. Hooray...?", null, "Guess so.", null) },
+        { 29, new Dialogue(29, null, new List<DialogueEffect>() { new QuestEffect(8, false, true), new ItemEffect(6, -1), new ItemEffect(7, 1), new ChangeEffect(27), new SoundEffect("Train Station Sounds/Train Station Interactables/ATM Extract") }, "Xerox", "You now have even more papers. Hooray...?", null, "Guess so.", null) },
 
         { 30, new Dialogue(30, "diana", new List<DialogueEffect>(), "Diana", "Oh, hey, you look not busy, unlike me. I got these papers I need copying. Go do it for me.", "Why would I do that?", null, "*Back away slowly*") },
         { 31, new Dialogue(31, "diana", new List<DialogueEffect>(), "Diana", "I can pay you to do it. I don't care, just go do it.", "Alright, sounds good.", null, "Lemme think about it") },
@@ -362,7 +372,7 @@ public class Database : ScriptableObject
         { 41, new Dialogue(41, "sewer", new List<DialogueEffect>(), "Sewer Hobo", "Let a man enjoy his burger, will ya?", null, "Umm, okay?", null) },
 
         { 42, new Dialogue(42, null, new List<DialogueEffect>(), "Trashcan", "There's a lot of random trash in here, but there's also an old discarded burger. Maybe it could be useful?", "Take it", null, "No thanks") },
-        { 43, new Dialogue(43, null, new List<DialogueEffect>() { new DestroyEffect(), new QuestEffect(10, false, true), new ItemEffect(9, 1) }, "Trashcan", "You are now the proud holder of an old moldy trash burger!", null, "Great...?", null) },
+        { 43, new Dialogue(43, null, new List<DialogueEffect>() { new DestroyEffect(), new QuestEffect(10, false, true), new ItemEffect(9, 1), new SoundEffect("Train Station Sounds/Train Station Interactables/Garbage Rumage") }, "Trashcan", "You are now the proud holder of an old moldy trash burger!", null, "Great...?", null) },
 
         { 44, new Dialogue(44, "homeless1", new List<DialogueEffect>() { new QuestEffect(12, true, false) }, "Weird Guy", "Hey, you know, there are some packages I... lost... through the station. If you find one, mind bringing it to me?", "I got one here", null, "Okay, I guess") },
         { 45, new Dialogue(45, "homeless1", new List<DialogueEffect>() { new QuestEffect(13, false, true), new ChangeEffect(46), new ItemEffect(8, -1), new MoneyEffect(20), new QuestObjectEffect("WeirdGuy", false) }, "Weird Guy", "Thanks man. Here's a 20. Don't spend it all in one place! I'm serious. Don't.", null, "Right...", null) },

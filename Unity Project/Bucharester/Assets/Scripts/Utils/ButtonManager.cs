@@ -21,7 +21,7 @@ public class ButtonManager : MonoBehaviour
 
     public void LoadMainScene()
     {
-        SceneManager.LoadScene("Main 1");
+        SceneManager.LoadScene("Northern Station");
     }
 
     public void LoadMainMenu()
