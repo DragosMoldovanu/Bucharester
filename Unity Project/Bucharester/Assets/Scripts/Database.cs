@@ -275,15 +275,15 @@ public class Database : ScriptableObject
     public static Dictionary<int, ItemData> itemDatabase = new Dictionary<int, ItemData>()
     {
         { 1, new ItemData("burger", "Burger", "This tiny burger can also travel through thick walls.", true, 25) },
-        { 2, new ItemData("burger", "Chips", "This was definitely not made in China.", true, 20) },
-        { 3, new ItemData("soda", "Soda", "Refreshing sugary beverage, timed bomb, who knows what else.", true, 10) },
-        { 4, new ItemData("burger", "Cold Sandwitch", "May not be tasty, but at least it does its job, who needs laxatives anymore?", true, 40) },
-        { 5, new ItemData("burger", "Chocolate Bar", "Once a slice of heaven, now a reminder of hell.", true, 20) },
+        { 2, new ItemData("burger", "Chips", "For when you want to destroy your liver and don't have access to tabacco or booze.", true, 20) },
+        { 3, new ItemData("soda", "Soda", "Makes your heart skip a bit...or two. You should go see a doctor about that.", true, 10) },
+        { 4, new ItemData("burger", "Cold Sandwitch", "Probably cheaper than a box of laxatives and just as effective.", true, 40) },
+        { 5, new ItemData("burger", "Chocolate Bar", "No chocolate in this chocolate bar, but it's sweet so who cares.", true, 20) },
 
-        { 6, new ItemData("soda", "Files", "A tree named Greet might have been hurt in the process", false) },
-        { 7, new ItemData("soda", "More Files", "What's better than papers? More papers!", false) },
-        { 8, new ItemData("soda", "Sketchy Package", "I have a feeling you don't want to take a look inside. Perhaps some other hobo might want it?", false) },
-        { 9, new ItemData("burger", "Trash Burger", "Whatever you do, DO NOT EAT.", false) }
+        { 6, new ItemData("soda", "Files", "Tree after tree cut down for these, and to what end...", false) },
+        { 7, new ItemData("soda", "More Files", "...to what end?", false) },
+        { 8, new ItemData("soda", "Sketchy Package", "What's this, lemme take a whiff of it...maybe another one. Maybe another hobo would be willing to trade it for something that doesn't make my head spin.", false) },
+        { 9, new ItemData("burger", "Trash Burger", "Whatever you do, DO NOT EAT. Well, at the same time, beggars can't be choosers.", false) }
     };
 
     public static Dictionary<int, Quest> questDatabase = new Dictionary<int, Quest>()
@@ -309,9 +309,9 @@ public class Database : ScriptableObject
 
     public static Dictionary<int, Dialogue> dialogueDatabase = new Dictionary<int, Dialogue>()
     {
-        { 1, new Dialogue(1, "mom", new List<DialogueEffect>(), "Mom", "Hey, did you get there alright duckling?", "Yeah, everything's fine", null, "Did not have the greatest start...") },
-        { 2, new Dialogue(2, "mom", new List<DialogueEffect>() { new QuestEffect(1, false, true), new ChangeEffect(4), new ChangePhoneEffect("Mom", 4), new ChangeStartingDialogueEffect("TaxiGuy", 9), new QuestObjectEffect("TaxiGuy", true) }, "Mom", "Glad to hear. We'll talk more later. Don't forget about the snack I packed you. Love you!", null, "Yeah, thanks. Love you.", null) },
-        { 3, new Dialogue(3, "mom", new List<DialogueEffect>() { new QuestEffect(1, false, true), new ChangeEffect(4), new ChangePhoneEffect("Mom", 4), new ChangeStartingDialogueEffect("TaxiGuy", 9), new QuestObjectEffect("TaxiGuy", true) }, "Mom", "Aww, I'm sorry pumpkin. We'll talk more later. Eat the snack I prepared for you and feel better. Love you!", null, "Yeah, thanks. Love you.", null) },
+        { 1, new Dialogue(1, "mom", new List<DialogueEffect>(), "Mom", "Hey, did you get there alright duckling?", "Yeah, I'm fine", null, "Well, depends what you mean by that...") },
+        { 2, new Dialogue(2, "mom", new List<DialogueEffect>() { new QuestEffect(1, false, true), new ChangeEffect(4), new ChangePhoneEffect("Mom", 4), new ChangeStartingDialogueEffect("TaxiGuy", 9), new QuestObjectEffect("TaxiGuy", true) }, "Mom", "Glad to hear. We'll talk more later. Don't forget about the snack I packed you. Love you!", null, "Yeah, thanks.", null) },
+        { 3, new Dialogue(3, "mom", new List<DialogueEffect>() { new QuestEffect(1, false, true), new ChangeEffect(4), new ChangePhoneEffect("Mom", 4), new ChangeStartingDialogueEffect("TaxiGuy", 9), new QuestObjectEffect("TaxiGuy", true) }, "Mom", "Aww, I'm sorry pumpkin. Well you better eat something. We'll talk more later. Love you!", null, "Yeah, thanks.", null) },
         { 4, new Dialogue(4, "mom", new List<DialogueEffect>(), "Mom", "I'm a bit busy dear. We'll talk later.", null, "Okay...", null) },
 
         { 5, new Dialogue(5, null, new List<DialogueEffect>(), "Backpack", "Your backpack lies on the ground. It's open and empty. All of its contents are gone.", "Take it", null, "Hold on") },
