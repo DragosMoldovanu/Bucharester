@@ -9,6 +9,7 @@ public class QuestController : MonoBehaviour
     public Text questObjectives;
 
     public int id;
+    public AudioClip completeSound;
 
     public void SetQuestData(int _id, string title, int objCount, string[] objectives)
     {
@@ -20,5 +21,11 @@ public class QuestController : MonoBehaviour
         {
             questObjectives.text += "- " + objectives[i] + "\n";
         }
+    }
+
+    public void CompleteSound()
+    {
+        GetComponent<AudioSource>().clip = completeSound;
+        GetComponent<AudioSource>().Play();
     }
 }
