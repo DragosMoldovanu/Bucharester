@@ -53,7 +53,7 @@ public class TutorialManager : MonoBehaviour
         {
             Destroy(inventory);
         }
-        if (movement != null && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
+        if (movement != null && movement.activeSelf && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
         {
             movement.GetComponent<Animator>().SetTrigger("fadeout");
             cam.SetActive(true);

@@ -24,6 +24,10 @@ public class IntroCinematic : MonoBehaviour
     public GameObject backpack;
     public GameObject wallet;
 
+    [Header("Sounds")]
+    public GameObject trainAmbient1;
+    public GameObject trainAmbient2;
+
     [Header("Timers")]
     public float fadein;
     public float dialogue1;
@@ -45,6 +49,8 @@ public class IntroCinematic : MonoBehaviour
 
     private float time;
 
+    private bool skipped = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,34 +60,46 @@ public class IntroCinematic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (time >= fadein && !step1)
+        if (Input.GetKeyDown(KeyCode.Escape) && !skipped)
         {
+            skipped = true;
+            fade.GetComponent<Animator>().SetTrigger("fadeout");
+            Destroy(fade.transform.GetChild(0).gameObject);
+            trainAmbient1.SetActive(true);
+            trainAmbient2.SetActive(true);
+            time = fadebackin;
+        }
+
+        if (time >= fadein && !step1 && !skipped)
+        {
+            trainAmbient1.SetActive(true);
+            trainAmbient2.SetActive(true);
             fade.GetComponent<Animator>().SetTrigger("fadein");
             step1 = true;
         }
-        if (time >= dialogue1 && !step2)
+        if (time >= dialogue1 && !step2 && !skipped)
         {
             diag1.SetActive(true);
             step2 = true;
         }
-        if (time >= dialogue2 && !step3)
+        if (time >= dialogue2 && !step3 && !skipped)
         {
             ding.SetActive(true);
             diag2.SetActive(true);
             step3 = true;
         }
-        if (time >= thievesStart)
+        if (time >= thievesStart && !skipped)
         {
             thief1.transform.position = Vector3.Lerp(thiefStart1, thiefEnd1, (time - thievesStart) / (thievesBonk - thievesStart));
             thief2.transform.position = Vector3.Lerp(thiefStart2, thiefEnd2, (time - thievesStart) / (thievesBonk - thievesStart));
         }
-        if (time >= thievesBonk && !step5)
+        if (time >= thievesBonk && !step5 && !skipped)
         {
             kapow.SetActive(true);
             fade.GetComponent<Animator>().SetTrigger("fadeout");
             step5 = true;
         }
-        if (time >= fadebackin)
+        if (time >= fadebackin || skipped)
         {
             fade.GetComponent<Animator>().SetTrigger("fadein");
 
@@ -100,7 +118,13 @@ public class IntroCinematic : MonoBehaviour
             backpack.SetActive(true);
             wallet.SetActive(true);
 
-            enabled = false;
+            trainAmbient1.GetComponent<AudioSource>().volume = Mathf.Lerp(0.15f, 1, time - fadebackin);
+            trainAmbient2.GetComponent<AudioSource>().volume = Mathf.Lerp(0.15f, 1, time - fadebackin);
+
+            if (time > fadebackin + 1)
+            {
+                enabled = false;
+            }
         }
 
         time += Time.deltaTime;
