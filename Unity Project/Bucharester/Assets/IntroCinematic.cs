@@ -118,8 +118,8 @@ public class IntroCinematic : MonoBehaviour
             backpack.SetActive(true);
             wallet.SetActive(true);
 
-            trainAmbient1.GetComponent<AudioSource>().volume = Mathf.Lerp(0.15f, 1, time - fadebackin);
-            trainAmbient2.GetComponent<AudioSource>().volume = Mathf.Lerp(0.15f, 1, time - fadebackin);
+            trainAmbient1.GetComponent<AudioSource>().volume = Mathf.Lerp(0.15f, 0.4f, time - fadebackin);
+            trainAmbient2.GetComponent<AudioSource>().volume = Mathf.Lerp(0.15f, 0.4f, time - fadebackin);
 
             if (time > fadebackin + 1)
             {
