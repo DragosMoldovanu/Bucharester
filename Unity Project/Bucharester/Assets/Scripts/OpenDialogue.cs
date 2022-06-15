@@ -224,6 +224,15 @@ public class OpenDialogue : MonoBehaviour
                 optionButton1.GetComponent<DialogueOption>().changesItem = false;
                 optionButton1.GetComponent<DialogueOption>().changesMoney = false;
             }
+
+            if (node.option1 == 0)
+            {
+                optionButton1.GetComponent<DialogueOption>().finishesGame = true;
+            }
+            else
+            {
+                optionButton1.GetComponent<DialogueOption>().finishesGame = false;
+            }
         }
         else
         {
@@ -277,6 +286,15 @@ public class OpenDialogue : MonoBehaviour
                 optionButton2.GetComponent<DialogueOption>().changesItem = false;
                 optionButton2.GetComponent<DialogueOption>().changesMoney = false;
             }
+
+            if (node.option2 == 0)
+            {
+                optionButton2.GetComponent<DialogueOption>().finishesGame = true;
+            }
+            else
+            {
+                optionButton2.GetComponent<DialogueOption>().finishesGame = false;
+            }
         }
         else
         {
@@ -329,6 +347,15 @@ public class OpenDialogue : MonoBehaviour
                 optionButton3.GetComponent<DialogueOption>().affectsQuest = false;
                 optionButton3.GetComponent<DialogueOption>().changesItem = false;
                 optionButton3.GetComponent<DialogueOption>().changesMoney = false;
+            }
+
+            if (node.option3 == 0)
+            {
+                optionButton3.GetComponent<DialogueOption>().finishesGame = true;
+            }
+            else
+            {
+                optionButton3.GetComponent<DialogueOption>().finishesGame = false;
             }
         }
         else
