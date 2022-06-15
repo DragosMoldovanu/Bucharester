@@ -15,6 +15,8 @@ public class StatsManager : MonoBehaviour
     public int moneyAmount = 5;
     public float hungerPercent = 50;
 
+    public GameObject gameOverScreen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,11 @@ public class StatsManager : MonoBehaviour
         else
         {
             GameObject.Find("Tutorial Popups").GetComponent<TutorialManager>().HungerFine();
+        }
+
+        if (hungerPercent <= 0)
+        {
+            gameOverScreen.SetActive(true);
         }
     }
 

@@ -21,6 +21,9 @@ public class IntroCinematic : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject tutorials;
 
+    public GameObject topBar;
+    public GameObject bottomBar;
+
     public GameObject backpack;
     public GameObject wallet;
 
@@ -67,6 +70,10 @@ public class IntroCinematic : MonoBehaviour
             Destroy(fade.transform.GetChild(0).gameObject);
             trainAmbient1.SetActive(true);
             trainAmbient2.SetActive(true);
+
+            Destroy(topBar);
+            Destroy(bottomBar);
+
             time = fadebackin;
         }
 

@@ -416,7 +416,7 @@ public class Database : ScriptableObject
         { 12, new TreeNode(dialogueDatabase[12], 15, 14, 13) },
         { 13, new TreeNode(dialogueDatabase[13], -1, 14, -1) },
         { 14, new TreeNode(dialogueDatabase[14], -1, -1, -1) },
-        { 15, new TreeNode(dialogueDatabase[15], -1, -1, -1) },
+        { 15, new TreeNode(dialogueDatabase[15], -1, 0, -1) },
 
         { 16, new TreeNode(dialogueDatabase[16], 17, -1, -1) },
         { 17, new TreeNode(dialogueDatabase[17], 19, -1, 18) },

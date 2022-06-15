@@ -25,6 +25,9 @@ public class DialogueOption : MonoBehaviour
     public bool changesMoney;
     public int quantity;
 
+    public bool finishesGame;
+    public GameObject gameCompleteScreen;
+
     void Start()
     {
         box = GameObject.Find("DialogueFade");
@@ -83,6 +86,11 @@ public class DialogueOption : MonoBehaviour
         {
             interactObject.GetComponent<OpenDialogue>().dialogueId = continueId;
             interactObject.GetComponent<OpenDialogue>().Open(false);
+        }
+
+        if (finishesGame)
+        {
+            gameCompleteScreen.SetActive(true);
         }
     }
 }
