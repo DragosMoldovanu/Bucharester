@@ -30,6 +30,7 @@ public class IntroCinematic : MonoBehaviour
     [Header("Sounds")]
     public GameObject trainAmbient1;
     public GameObject trainAmbient2;
+    public GameObject musicAmbient;
 
     [Header("Timers")]
     public float fadein;
@@ -70,6 +71,7 @@ public class IntroCinematic : MonoBehaviour
             Destroy(fade.transform.GetChild(0).gameObject);
             trainAmbient1.SetActive(true);
             trainAmbient2.SetActive(true);
+            musicAmbient.SetActive(true);
 
             Destroy(topBar);
             Destroy(bottomBar);
@@ -125,10 +127,12 @@ public class IntroCinematic : MonoBehaviour
             backpack.SetActive(true);
             wallet.SetActive(true);
 
-            trainAmbient1.GetComponent<AudioSource>().volume = Mathf.Lerp(0.15f, 0.4f, time - fadebackin);
-            trainAmbient2.GetComponent<AudioSource>().volume = Mathf.Lerp(0.15f, 0.4f, time - fadebackin);
+            trainAmbient1.GetComponent<AudioSource>().volume = Mathf.Lerp(0.15f, 0.2f, time - fadebackin);
+            trainAmbient2.GetComponent<AudioSource>().volume = Mathf.Lerp(0.15f, 0.5f, time - fadebackin);
+            musicAmbient.SetActive(true);
+            musicAmbient.GetComponent<AudioSource>().volume = Mathf.Lerp(0, 0.5f, (time - fadebackin) / 3);
 
-            if (time > fadebackin + 1)
+            if (time > fadebackin + 3)
             {
                 enabled = false;
             }
