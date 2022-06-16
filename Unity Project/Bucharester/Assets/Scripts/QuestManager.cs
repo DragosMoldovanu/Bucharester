@@ -19,6 +19,8 @@ public class QuestManager : MonoBehaviour
 
         AcceptQuest(Database.startingQuest);
         Database.contactsDatabase["Mom"] = 1;
+        Database.questObjects = new List<string>() { "Diana", "Manhole", "WeirdGuy" };
+        Database.questedObjects = new List<string>();
     }
 
     // Update is called once per frame
