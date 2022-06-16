@@ -21,7 +21,7 @@ public class InventoryItemController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SetItemData(int itemId, Sprite icon, string name, string description, bool usable)
@@ -32,6 +32,10 @@ public class InventoryItemController : MonoBehaviour
         itemDescription.text = description;
 
         useButton.interactable = usable;
+        if (!usable)
+        {
+            useButton.transform.GetChild(0).GetComponent<Text>().color = new Color(0.22f, 0.22f, 0.22f);
+        }
     }
 
     public void ClickItem()

@@ -68,13 +68,17 @@ public class IntroCinematic : MonoBehaviour
         {
             skipped = true;
             fade.GetComponent<Animator>().SetTrigger("fadeout");
-            Destroy(fade.transform.GetChild(0).gameObject);
+            if (fade.transform.childCount > 0)
+                Destroy(fade.transform.GetChild(0).gameObject);
             trainAmbient1.SetActive(true);
             trainAmbient2.SetActive(true);
             musicAmbient.SetActive(true);
 
-            Destroy(topBar);
-            Destroy(bottomBar);
+            if (topBar != null)
+            {
+                Destroy(topBar);
+                Destroy(bottomBar);
+            }
 
             time = fadebackin;
         }
@@ -112,7 +116,7 @@ public class IntroCinematic : MonoBehaviour
         {
             fade.GetComponent<Animator>().SetTrigger("fadein");
 
-            player.GetComponent<Movement>().enabled = true;
+            player.GetComponent<Movement>().canMove = true;
             cam.GetComponent<FollowPlayer>().enabled = true;
             cam.GetComponent<ClickInteractables>().enabled = true;
             questList.SetActive(true);

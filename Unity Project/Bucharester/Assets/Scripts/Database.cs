@@ -285,15 +285,15 @@ public class Database : ScriptableObject
     public static Dictionary<int, ItemData> itemDatabase = new Dictionary<int, ItemData>()
     {
         { 1, new ItemData("burger", "Burger", "This tiny burger can also travel through thick walls.", true, 25) },
-        { 2, new ItemData("burger", "Chips", "For when you want to destroy your liver and don't have access to tabacco or booze.", true, 20) },
+        { 2, new ItemData("chips", "Chips", "For when you want to destroy your liver and don't have access to tabacco or booze.", true, 20) },
         { 3, new ItemData("soda", "Soda", "Makes your heart skip a beat...or two. You should go see a doctor about that.", true, 10) },
-        { 4, new ItemData("burger", "Cold Sandwitch", "Probably cheaper than a box of laxatives and just as effective.", true, 40) },
-        { 5, new ItemData("burger", "Chocolate Bar", "No chocolate in this chocolate bar, but it's sweet so who cares.", true, 20) },
+        { 4, new ItemData("sandwitch", "Cold Sandwitch", "Probably cheaper than a box of laxatives and just as effective.", true, 40) },
+        { 5, new ItemData("chocolate", "Chocolate Bar", "No chocolate in this chocolate bar, but it's sweet so who cares.", true, 20) },
 
-        { 6, new ItemData("soda", "Files", "Tree after tree cut down for these, and to what end...", false) },
-        { 7, new ItemData("soda", "More Files", "...to what end?", false) },
-        { 8, new ItemData("soda", "Sketchy Package", "What's this, lemme take a whiff of it...maybe another one. Maybe another hobo would be willing to trade it for something that doesn't make my head spin.", false) },
-        { 9, new ItemData("burger", "Trash Burger", "Whatever you do, DO NOT EAT. Well, at the same time, beggars can't be choosers.", false) }
+        { 6, new ItemData("files", "Files", "Tree after tree cut down for these, and to what end...", false) },
+        { 7, new ItemData("files2", "More Files", "...to what end?", false) },
+        { 8, new ItemData("bag", "Sketchy Package", "What's this, lemme take a whiff of it...maybe another one. Why is my head spinning..?", false) },
+        { 9, new ItemData("trash", "Trash Burger", "Whatever you do, DO NOT EAT. Well, at the same time, beggars can't be choosers.", false) }
     };
 
     public static Dictionary<int, Quest> questDatabase = new Dictionary<int, Quest>()
