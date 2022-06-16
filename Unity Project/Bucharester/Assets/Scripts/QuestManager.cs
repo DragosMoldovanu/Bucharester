@@ -18,6 +18,7 @@ public class QuestManager : MonoBehaviour
         completedQuests = new List<int>();
 
         AcceptQuest(Database.startingQuest);
+        Database.contactsDatabase["Mom"] = 1;
     }
 
     // Update is called once per frame
